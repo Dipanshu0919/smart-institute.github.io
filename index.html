@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartech Training Institute - Engineer Your Career</title>
+<meta name="description" content="Smartech Training Institute - hands-on courses in software development, data science, networking and more. Learn from industry mentors, build real projects, get placed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Circuit trace that runs the length of the page -- the signature element -->
+<div class="circuit-rail" aria-hidden="true">
+  <svg class="circuit-rail__line" width="2" height="100%" preserveAspectRatio="none">
+    <line x1="1" y1="0" x2="1" y2="100%" />
+  </svg>
+  <div class="circuit-rail__pulse" id="railPulse"></div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand" aria-label="Smartech Training Institute - home">
+      <!-- Swap this src for the logo link you provide. Fallback mark shows until then. -->
+      <span class="brand__mark" id="brandMark">
+        <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
+          <polygon points="24,3 43,14 43,34 24,45 5,34 5,14" fill="none" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M15 24 L21 24 L24 18 L27 30 L30 24 L33 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="15" cy="24" r="2" fill="currentColor"/>
+          <circle cx="33" cy="24" r="2" fill="currentColor"/>
+        </svg>
+      </span>
+      <img class="brand__logo-img" id="brandLogoImg" src="" alt="Smartech Training Institute logo" hidden>
+      <span class="brand__word">Smartech<em>Training Institute</em></span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#courses">Courses</a>
+      <a href="#why">Why Us</a>
+      <a href="#path">How It Works</a>
+      <a href="#contact">Contact</a>
+      <a href="#enroll" class="btn btn--solid main-nav__cta">Enroll now</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#contact" class="btn btn--ghost hide-mobile">Talk to a mentor</a>
+      <a href="#enroll" class="btn btn--solid hide-mobile">Enroll now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero__board" aria-hidden="true">
+      <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+        <g class="trace-group">
+          <path class="trace" d="M-20 120 H260 V260 H520 V90 H860 V300 H1220" />
+          <path class="trace" d="M-20 420 H180 V520 H460 V380 H760 V560 H1220" />
+          <path class="trace" d="M-20 620 H340 V500 H640 V640 H1220" />
+          <path class="trace trace--v" d="M260 120 V-20 M520 260 V420 M860 90 V-20 M180 420 V300 M640 640 V-20" />
+        </g>
+        <g class="node-group">
+          <circle class="node" cx="260" cy="120" r="5"/>
+          <circle class="node" cx="520" cy="260" r="5"/>
+          <circle class="node" cx="860" cy="90" r="5"/>
+          <circle class="node" cx="180" cy="420" r="5"/>
+          <circle class="node" cx="460" cy="520" r="5"/>
+          <circle class="node" cx="760" cy="380" r="5"/>
+          <circle class="node" cx="340" cy="620" r="5"/>
+          <circle class="node" cx="640" cy="500" r="5"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="wrap hero__inner">
+      <p class="eyebrow">Hands-on software &amp; IT training - Palghar</p>
+      <h1 class="hero__title">Every great engineer<br> starts on a <span>breadboard.</span></h1>
+      <p class="hero__sub">Smartech Training Institute is built to turn beginners into hire-ready developers, analysts and network engineers - through project-based courses, live mentor sessions, and dedicated placement support from day one.</p>
+
+      <div class="hero__cta-row">
+        <a href="#courses" class="btn btn--solid btn--lg">Browse courses</a>
+        <a href="#path" class="btn btn--outline btn--lg">See how it works</a>
+      </div>
+
+      <div class="hero__stats">
+        <div class="stat">
+          <span class="stat__num" data-count="3">0</span>
+          <span class="stat__label">Courses offered</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="18">0</span>
+          <span class="stat__label">Max batch size</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="100" data-suffix="%">0</span>
+          <span class="stat__label">Project-based learning</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="6" data-suffix=" days/wk">0</span>
+          <span class="stat__label">Mentor support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT STRIP ============ -->
+  <section class="about-strip">
+    <div class="wrap about-strip__inner">
+      <p class="about-strip__lead">Smartech isn't a lecture hall. It's a workshop.</p>
+      <p class="about-strip__body">Every course is built around a real build - a working app, a configured network, a trained model - because that's what employers actually screen for. Small batches, hands-on labs, and mentors who still ship code for a living.</p>
+    </div>
+  </section>
+
+  <!-- ============ COURSES ============ -->
+  <section class="courses" id="courses">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--dark">Courses</p>
+        <h2>Pick a track. Build the whole way through.</h2>
+      </div>
+
+      <div class="course-grid" id="courseGrid">
+
+        <article class="course-card" data-cat="dev">
+          <div class="course-card__top">
+            <span class="course-card__tag">Full Stack Development</span>
+            <span class="course-card__level">Beginner → Job-ready</span>
+          </div>
+          <h3>Full Stack Web Development</h3>
+          <p>HTML/CSS, JavaScript, React, Node.js and databases - capped off with a deployed capstone project.</p>
+          <ul class="course-card__meta">
+            <li>6 months</li><li>Weekday &amp; weekend batches</li><li>Live projects</li>
+          </ul>
+          <a href="#enroll" class="course-card__cta">Enroll <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="course-card" data-cat="dev">
+          <div class="course-card__top">
+            <span class="course-card__tag">Programming</span>
+            <span class="course-card__level">Beginner</span>
+          </div>
+          <h3>Python Programming</h3>
+          <p>Core syntax to automation, file handling and APIs - the same language you'll use again in data science.</p>
+          <ul class="course-card__meta">
+            <li>2 months</li><li>Certificate included</li><li>Mini projects</li>
+          </ul>
+          <a href="#enroll" class="course-card__cta">Enroll <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="course-card" data-cat="dev">
+          <div class="course-card__top">
+            <span class="course-card__tag">DevOps</span>
+            <span class="course-card__level">Intermediate</span>
+          </div>
+          <h3>DevOps Fundamentals</h3>
+          <p>Linux basics, Git, Docker and CI/CD pipelines - the practical ops skills teams expect from every developer now.</p>
+          <ul class="course-card__meta">
+            <li>3 months</li><li>Hands-on labs</li><li>Real deployments</li>
+          </ul>
+          <a href="#enroll" class="course-card__cta">Enroll <span aria-hidden="true">→</span></a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY US ============ -->
+  <section class="why" id="why">
+    <div class="wrap">
+      <div class="section-head section-head--light">
+        <p class="eyebrow">Why Smartech</p>
+        <h2>The parts that actually change your outcome.</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M8 30 L8 14 L20 6 L32 14 L32 30 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 30 V20 H24 V30" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <h3>Small batches, real feedback</h3>
+          <p>Capped at 18 students per batch, so mentors review your code and your questions get answered the same session.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="13" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 12 V20 L26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Built around your schedule</h3>
+          <p>Weekday, weekend and evening batches, plus recorded sessions for anyone who works or studies alongside.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><rect x="7" y="9" width="26" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 15 H33" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="12" r="1.2" fill="currentColor"/></svg>
+          </div>
+          <h3>Mentors who still build</h3>
+          <p>Trainers currently working in dev, data and networking roles - not full-time instructors reading slides.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M20 6 L33 12 V22 C33 29 27 33 20 34 C13 33 7 29 7 22 V12 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 20 L18 24 L27 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Placement support, not just a certificate</h3>
+          <p>Resume reviews, mock interviews and active help connecting you with local hiring opportunities as you finish your course.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS / PATH ============ -->
+  <section class="path" id="path">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--dark">How it works</p>
+        <h2>One circuit, start to placement.</h2>
+      </div>
+
+      <div class="path-track">
+        <div class="path-step">
+          <span class="path-step__marker">01</span>
+          <h3>Counselling &amp; course fit</h3>
+          <p>A short conversation about your goals and background, so you start on the right track - not just the popular one.</p>
+        </div>
+        <div class="path-step">
+          <span class="path-step__marker">02</span>
+          <h3>Foundation modules</h3>
+          <p>Core concepts and tools, taught through labs rather than slides, with weekly checkpoints to catch gaps early.</p>
+        </div>
+        <div class="path-step">
+          <span class="path-step__marker">03</span>
+          <h3>Capstone project</h3>
+          <p>You design, build and present a real project end-to-end - the thing you'll actually talk about in interviews.</p>
+        </div>
+        <div class="path-step">
+          <span class="path-step__marker">04</span>
+          <h3>Placement support</h3>
+          <p>Resume and portfolio review, mock interviews, and hands-on help reaching out to local employers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENROLL / CONTACT ============ -->
+  <section class="enroll" id="enroll">
+    <div class="wrap enroll__grid">
+      <div class="enroll__info">
+        <p class="eyebrow">Get started</p>
+        <h2>Tell us what you want to build. We'll map the course to it.</h2>
+        <p class="enroll__sub">Fill the form and a course counsellor will call you within one working day - or reach us directly below.</p>
+
+        <ul class="contact-list" id="contact">
+          <li>
+            <span class="contact-list__label">Visit</span>
+            <span>Near Prakash Tokish, Side by ICICI Bank, 1st Floor, Palghar West, Maharashtra, 401404</span>
+          </li>
+          <li>
+            <span class="contact-list__label">Call</span>
+            <span><a href="tel:+919221204466">+91 92212 04466</a></span>
+          </li>
+          <li>
+            <span class="contact-list__label">Email</span>
+            <span><a href="mailto:smartech.009@gmail.com">smartech.009@gmail.com</a></span>
+          </li>
+          <li>
+            <span class="contact-list__label">Hours</span>
+            <span>Mon–Sat, 9:00 AM – 7:00 PM</span>
+          </li>
+        </ul>
+      </div>
+
+      <form class="enroll-form" id="enrollForm" novalidate>
+        <div class="form-row">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Your name" required>
+          <span class="form-error" data-error-for="fullName"></span>
+        </div>
+        <div class="form-row form-row--split">
+          <div>
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" placeholder="10-digit number" required>
+            <span class="form-error" data-error-for="phone"></span>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" required>
+            <span class="form-error" data-error-for="email"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="course">Course of interest</label>
+          <select id="course" name="course" required>
+            <option value="" disabled selected>Choose a course</option>
+            <option>Full Stack Web Development</option>
+            <option>Python Programming</option>
+            <option>DevOps Fundamentals</option>
+            <option>Not sure yet</option>
+          </select>
+          <span class="form-error" data-error-for="course"></span>
+        </div>
+        <div class="form-row">
+          <label for="message">Anything we should know? <em>(optional)</em></label>
+          <textarea id="message" name="message" rows="3" placeholder="Your background, preferred batch timing, goals..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--solid btn--lg btn--full">Request a callback</button>
+        <p class="form-success" id="formSuccess" role="status" aria-live="polite" hidden>You're on the list - a counsellor will call you within one working day.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="28" height="28">
+          <polygon points="24,3 43,14 43,34 24,45 5,34 5,14" fill="none" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M15 24 L21 24 L24 18 L27 30 L30 24 L33 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Smartech Training Institute</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="#courses">Courses</a>
+      <a href="#why">Why Us</a>
+      <a href="#path">How It Works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="footer-copy">© <span id="year"></span> Smartech Training Institute. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
