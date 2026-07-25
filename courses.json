@@ -1,0 +1,487 @@
+{
+  "categories": [
+    { "id": "all", "label": "All" },
+    { "id": "fullstack", "label": "Full Stack Development" },
+    { "id": "dev", "label": "Software Development" },
+    { "id": "cloud", "label": "Cloud & DevOps" },
+    { "id": "infra", "label": "Networking & Security" },
+    { "id": "office", "label": "Office & Business (DCA/ITFT)" },
+    { "id": "marketing", "label": "Digital Marketing" }
+  ],
+  "courses": [
+    {
+      "id": "java-fullstack",
+      "category": "fullstack",
+      "tag": "Full Stack Development",
+      "level": "Beginner → Job-ready",
+      "title": "Java Full Stack Development",
+      "summary": "Front-end: HTML, CSS, JavaScript with Angular or Vue.js. Back-end: Node.js with MongoDB, ending in live website hosting.",
+      "meta": ["Angular / Vue.js", "Node.js + MongoDB", "Live hosting"],
+      "syllabus": [
+        { "heading": "Front-End Development", "items": ["HTML, CSS, JavaScript", "Front-End Framework: Angular", "Front-End Framework: Vue.js"] },
+        { "heading": "Back-End Development", "items": ["Node.js", "Database Connectivity Tools: MongoDB", "Live Website Hosting"] }
+      ]
+    },
+    {
+      "id": "php-fullstack",
+      "category": "fullstack",
+      "tag": "Full Stack Development",
+      "level": "Beginner → Job-ready",
+      "title": "PHP Full Stack Development",
+      "summary": "Front-end: HTML, CSS, JavaScript with React or Bootstrap. Back-end: PHP with MySQL, ending in live website hosting.",
+      "meta": ["React / Bootstrap", "PHP + MySQL", "Live hosting"],
+      "syllabus": [
+        { "heading": "Front-End Development", "items": ["HTML, CSS, JavaScript", "Front-End Framework: React", "Front-End Framework: Bootstrap"] },
+        { "heading": "Back-End Development", "items": ["PHP", "Database Connectivity Tools: MySQL", "Live Website Hosting"] }
+      ]
+    },
+    {
+      "id": "python-fullstack",
+      "category": "fullstack",
+      "tag": "Full Stack Development",
+      "level": "Beginner → Job-ready",
+      "title": "Python Full Stack Development",
+      "summary": "Front-end: HTML, CSS, JavaScript with React. Back-end: Python with Django/Flask and SQL, ending in live website hosting.",
+      "meta": ["React", "Django / Flask + SQL", "Live hosting"],
+      "syllabus": [
+        { "heading": "Front-End Development", "items": ["HTML, CSS, JavaScript", "Front-End Framework: React"] },
+        { "heading": "Back-End Development", "items": ["Python, Django / Flask", "Database Connectivity Tools: SQL", "Live Website Hosting"] }
+      ]
+    },
+    {
+      "id": "web-programming",
+      "category": "dev",
+      "tag": "Web Development",
+      "level": "Beginner",
+      "title": "Web Programming",
+      "summary": "Notepad and Sublime workflow through HTML5, CSS3, JavaScript, PHP, WordPress and advanced internet skills.",
+      "meta": ["HTML5, CSS3, JS, PHP", "WordPress", "Website hosting (FTP)", "Live projects"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Notepad", "Sublime", "HTML5", "CSS3", "Java Script", "PHP", "WordPress", "Advance Internet", "Website Hosting (FTP)", "Live Projects"] }
+      ]
+    },
+    {
+      "id": "c-cpp",
+      "category": "dev",
+      "tag": "Programming",
+      "level": "Beginner",
+      "title": "C & C++ Programming",
+      "summary": "Core programming logic, data structures and problem-solving — the foundation most tech careers start on.",
+      "meta": ["Practice assignments", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Programming fundamentals", "Control structures & functions", "Arrays, pointers & structures", "Object-oriented basics (C++)", "Data structures fundamentals", "Practice assignments & exam"] }
+      ]
+    },
+    {
+      "id": "core-advance-java",
+      "category": "dev",
+      "tag": "Programming",
+      "level": "Beginner → Advanced",
+      "title": "Core & Advance Java",
+      "summary": "Object-oriented fundamentals through advanced concepts — ready for interviews and Java full-stack work.",
+      "meta": ["Interview prep", "Mock tests"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Core Java: OOP, collections, exception handling", "Multithreading & file handling", "Advance Java: Servlets & JSP basics", "Database connectivity (JDBC)", "Interview preparation & mock tests"] }
+      ]
+    },
+    {
+      "id": "dotnet",
+      "category": "dev",
+      "tag": "Programming",
+      "level": "Intermediate",
+      "title": ".Net Programming",
+      "summary": "C# and the .Net framework for building enterprise-style desktop and web applications.",
+      "meta": ["Hands-on projects", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["C# language fundamentals", "Object-oriented programming in .Net", "Windows Forms / desktop applications", "ASP.Net web application basics", "Hands-on project work"] }
+      ]
+    },
+    {
+      "id": "mysql",
+      "category": "dev",
+      "tag": "Database",
+      "level": "Beginner",
+      "title": "MySQL",
+      "summary": "Relational database design, queries and administration — the database skill every developer needs.",
+      "meta": ["Query practice", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Database design fundamentals", "SQL queries & joins", "Stored procedures & functions", "Indexing & performance basics", "Database administration basics"] }
+      ]
+    },
+    {
+      "id": "python-programming",
+      "category": "dev",
+      "tag": "Programming",
+      "level": "Beginner",
+      "title": "Python Programming",
+      "summary": "Core syntax to automation, file handling and APIs — a strong base for web, data and DevOps work alike.",
+      "meta": ["Mini projects", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Python syntax & core concepts", "Functions, file handling & modules", "Automation scripting", "Working with APIs", "Mini projects & assignments"] }
+      ]
+    },
+    {
+      "id": "cloud-devops",
+      "category": "cloud",
+      "tag": "Cloud & DevOps",
+      "level": "Beginner → Advanced",
+      "title": "Cloud Computing & DevOps",
+      "summary": "A four-module program: Windows Server & Linux networking, core cloud concepts across AWS/Azure/GCP, hands-on Azure & AWS administration, and DevOps & cloud architecture.",
+      "meta": ["Module 1: Win Server & Linux Networks", "Module 2: Core Cloud Concepts", "Module 3: Azure & AWS Administration", "Module 4: DevOps & Cloud Architecture"],
+      "syllabus": [
+        { "heading": "Module 1 — Win Server & Linux Networks", "items": [
+          "Basics of Server Management",
+          "LAN, MAN and WAN",
+          "OSI Layers",
+          "Distributed Systems: Network, Internet",
+          "Web Service and Security",
+          "Distributed File System",
+          "DFS and Distributed Algorithms",
+          "High Performance Computing: Programming Models, Cluster Computing",
+          "Grid Programming, Parallelism",
+          "Information Storage Management: RAID and Levels",
+          "Backup, Recovery & Replication",
+          "Interfacing with Virtualization",
+          "Cloud Computing Tools & Techniques"
+        ]},
+        { "heading": "Module 2 — Core Cloud Concepts", "items": [
+          "Introduction to Cloud Computing",
+          "Cloud Service Providers: AWS, GCP, Microsoft Azure",
+          "Cloud Computing Architecture: Virtualization, Virtual Machines, Containers, Serverless Computing",
+          "Cloud Security and Compliance",
+          "Cloud Storage and Databases",
+          "Networking and Connectivity",
+          "Monitoring and Management",
+          "Cloud Migration and DevOps",
+          "Cost Optimization",
+          "Case Studies and Best Practices"
+        ]},
+        { "heading": "Module 3 — Azure & AWS Administration", "items": [
+          "Azure Infrastructure Deployment and Management",
+          "Azure Identity and Access Management",
+          "Azure Networking, Storage Solutions & Virtual Machines",
+          "Azure Monitoring and Security",
+          "AWS Identity and Access Management",
+          "AWS Networking and Compute Services",
+          "AWS Storage and Content Delivery",
+          "AWS Database Services",
+          "AWS Monitoring and Security",
+          "AWS High Availability and Fault Tolerance",
+          "Cost Optimization, Case Studies and Best Practices"
+        ]},
+        { "heading": "Module 4 — DevOps and Cloud Architecture", "items": [
+          "Cloud Architecture Design Patterns",
+          "Infrastructure as Code",
+          "Continuous Integration and Continuous Deployment",
+          "Containerization and Orchestration",
+          "Cloud Migration",
+          "Security and Compliance",
+          "Monitoring, Logging and Analytics",
+          "High Availability and Disaster Recovery"
+        ]}
+      ]
+    },
+    {
+      "id": "hardware-networking",
+      "category": "infra",
+      "tag": "A+ N+",
+      "level": "Beginner",
+      "title": "Computer Hardware & Networking",
+      "summary": "CompTIA A+ and Network+ foundations — hardware troubleshooting and core networking concepts.",
+      "meta": ["Hands-on hardware labs", "Exam guidance"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["PC hardware assembly & troubleshooting", "Operating system installation & support", "Networking fundamentals", "Network devices & cabling", "TCP/IP basics", "Exam-oriented practice"] }
+      ]
+    },
+    {
+      "id": "ccna",
+      "category": "infra",
+      "tag": "CCNA",
+      "level": "Beginner → CCNA",
+      "title": "Cisco Certified Network Associate",
+      "summary": "Routing, switching and network fundamentals on real lab hardware, mapped to official CCNA topics.",
+      "meta": ["Lab hours included", "Exam guidance"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Networking fundamentals", "Routing & switching concepts", "IP addressing & subnetting", "Network security fundamentals", "Automation & programmability basics", "Hands-on lab practice"] }
+      ]
+    },
+    {
+      "id": "mcsa",
+      "category": "infra",
+      "tag": "MCSA",
+      "level": "Intermediate",
+      "title": "Microsoft Certified Solutions Associate",
+      "summary": "Windows Server administration and management, mapped to Microsoft's official certification path.",
+      "meta": ["Exam guidance", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Windows Server installation & configuration", "Active Directory administration", "Storage & file services", "Network services administration", "Exam-oriented practice"] }
+      ]
+    },
+    {
+      "id": "linux-redhat",
+      "category": "infra",
+      "tag": "Linux",
+      "level": "Intermediate",
+      "title": "Red Hat & Kali Linux Administration",
+      "summary": "Linux system administration on Red Hat and Kali — the OS skills behind every server and security role.",
+      "meta": ["Hands-on labs", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Linux fundamentals & shell scripting", "User & file system administration", "Red Hat server administration", "Kali Linux security tools overview", "Hands-on lab practice"] }
+      ]
+    },
+    {
+      "id": "ceh",
+      "category": "infra",
+      "tag": "C|EH",
+      "level": "Intermediate",
+      "title": "Certified Ethical Hacker",
+      "summary": "Vulnerability assessment and penetration testing fundamentals, practiced in a contained lab environment.",
+      "meta": ["Lab environment", "Practical exam"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Ethical hacking fundamentals & footprinting", "Scanning networks & vulnerability analysis", "System hacking techniques", "Web application & network attacks", "Practical lab exercises & exam prep"] }
+      ]
+    },
+    {
+      "id": "chfi",
+      "category": "infra",
+      "tag": "C|HFI",
+      "level": "Advanced",
+      "title": "Computer Hacking Forensic Investigator",
+      "summary": "Digital forensics — evidence collection, incident investigation and reporting for cybersecurity incidents.",
+      "meta": ["Case-based labs", "Exam guidance"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Computer forensics fundamentals", "Evidence collection & chain of custody", "Investigating file systems & operating systems", "Network & cloud forensics basics", "Case-based lab exercises"] }
+      ]
+    },
+    {
+      "id": "cnd",
+      "category": "infra",
+      "tag": "C|ND",
+      "level": "Intermediate",
+      "title": "Certified Network Defender",
+      "summary": "Defensive network security — protecting, detecting and responding to threats across an organization's network.",
+      "meta": ["Defense-focused labs", "Exam guidance"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Network security fundamentals & protocols", "Network defense management", "Threat detection & response", "Firewalls, IDS/IPS & VPN basics", "Defense-focused lab exercises"] }
+      ]
+    },
+    {
+      "id": "cct",
+      "category": "infra",
+      "tag": "C|CT",
+      "level": "Beginner → Intermediate",
+      "title": "Certified Cybersecurity Technician",
+      "summary": "Entry-level cybersecurity fundamentals across networking, security operations and system administration.",
+      "meta": ["Foundational labs", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Information security fundamentals", "Network security basics", "Identity & access management basics", "Security operations fundamentals", "Foundational lab exercises"] }
+      ]
+    },
+    {
+      "id": "eces",
+      "category": "infra",
+      "tag": "E|CES",
+      "level": "Advanced",
+      "title": "Certified Encryption Specialist",
+      "summary": "Cryptography fundamentals and applied encryption techniques used to secure data and communications.",
+      "meta": ["Applied cryptography labs", "Exam guidance"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Cryptography fundamentals", "Symmetric & asymmetric encryption", "Hashing algorithms", "PKI and digital certificates", "Applied cryptography lab exercises"] }
+      ]
+    },
+    {
+      "id": "cpent",
+      "category": "infra",
+      "tag": "C|PENT",
+      "level": "Advanced",
+      "title": "Certified Penetration Testing Professional",
+      "summary": "Advanced, hands-on penetration testing across networks, applications and cloud environments.",
+      "meta": ["Advanced lab environment", "Practical exam"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": ["Advanced network penetration testing", "Web application penetration testing", "Cloud penetration testing basics", "Exploitation & post-exploitation techniques", "Advanced hands-on lab exercises"] }
+      ]
+    },
+    {
+      "id": "office-automation",
+      "category": "office",
+      "tag": "DCA",
+      "level": "Beginner",
+      "title": "Advance Office Automation",
+      "summary": "Computer basics, English typing, Notepad/WordPad, MS Word, Excel & PowerPoint, printing, hardware and network concepts, and internet skills (email, surfing, downloading, uploading).",
+      "meta": ["MS Word, Excel, PowerPoint", "Internet & email skills", "Assignment & exam"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": [
+          "Computer Basics",
+          "English Typing",
+          "Notepad, WordPad",
+          "Microsoft Word",
+          "Microsoft Excel",
+          "Microsoft PowerPoint",
+          "Printing Method",
+          "Hardware Concept",
+          "Network Concept",
+          "Internet: Email ID, Surfing, Downloading, Uploading etc.",
+          "Assignment & Exam"
+        ]}
+      ]
+    },
+    {
+      "id": "advanced-excel",
+      "category": "office",
+      "tag": "Office Tools",
+      "level": "Intermediate",
+      "title": "Advanced Excel",
+      "summary": "Data consolidation, validation, H/VLookup, workbook sharing & protection, automation, goal seek, references & links, pivot tables, macros, what-if analysis, data tables and scenarios.",
+      "meta": ["Pivot tables & macros", "Lookups & what-if analysis", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": [
+          "Consolidate Data",
+          "Data Validation",
+          "H/VLookup",
+          "Sharing Workbooks",
+          "Protecting Workbooks",
+          "Automating Workbook",
+          "Goal Seek",
+          "References and Links",
+          "Pivot Tables",
+          "Reports & Forms",
+          "Macro",
+          "What-If Analysis",
+          "Evaluate Formula",
+          "Creating Sparklines",
+          "Mapping Data",
+          "Data Tables",
+          "Scenarios"
+        ]}
+      ]
+    },
+    {
+      "id": "graphics-dtp",
+      "category": "office",
+      "tag": "Design",
+      "level": "Beginner",
+      "title": "Graphics (DTP)",
+      "summary": "Typing in Hindi/Marathi/English, MS Paint, CorelDRAW (logos, banners, visiting & wedding cards), Photoshop (photo editing, posters, text effects) and Illustrator.",
+      "meta": ["CorelDRAW & Photoshop", "Illustrator", "Assignment & project"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": [
+          "Typing (Hindi/Marathi/English)",
+          "Painting Using MS Paint",
+          "CorelDRAW: Logo, Banner, Visiting Card, Wedding Card",
+          "Photoshop: Photo Editing, Poster Making, Text Effect",
+          "Illustrator",
+          "Assignment & Project",
+          "Exam"
+        ]}
+      ]
+    },
+    {
+      "id": "tally-erp9",
+      "category": "office",
+      "tag": "Tally ERP 9",
+      "level": "Beginner",
+      "title": "Tally ERP 9 — Financial Accounting",
+      "summary": "Intro to accounting, company creation, trial balance, order processing, voucher entries, godown & stock journal, receipt/delivery notes, price lists, batch details, tax ledger and cheque printing.",
+      "meta": ["Voucher & inventory entries", "Tax ledger & cheque printing", "Certificate included"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": [
+          "Introduction to Accounting",
+          "Company Creation",
+          "Trial Balance",
+          "Order Processing",
+          "Voucher Entries",
+          "Godown Entry",
+          "Receipt Note",
+          "Delivery Note",
+          "Rejection In/Out Note",
+          "Manufacturing Journal",
+          "Inventory Note",
+          "Stock Journal",
+          "Price List",
+          "Discount",
+          "Batch Wise Details",
+          "Interest Calculation",
+          "Tax Ledger",
+          "Cheque Printing"
+        ]}
+      ]
+    },
+    {
+      "id": "tally-prime-gst",
+      "category": "office",
+      "tag": "Tally Prime",
+      "level": "Beginner → Intermediate",
+      "title": "Advance Tally Prime & GST",
+      "summary": "Ledgers, stock & voucher entry, multi-currency, cost centers, point of sale, payroll, budgets and reports, plus full GST — SGST, CGST, IGST and UTGST — with F11/F12 configuration.",
+      "meta": ["SGST, CGST, IGST, UTGST", "Payroll & point of sale", "Practical entries"],
+      "syllabus": [
+        { "heading": "Curriculum", "items": [
+          "Ledger",
+          "Stock Entry",
+          "Voucher Entry",
+          "Debit-Credit Note",
+          "Stock-Physical Journal",
+          "Price List",
+          "Batch Wise Details",
+          "Actual & Bill Quantity",
+          "MRS",
+          "Multi Currency",
+          "Cost Center",
+          "Point of Sale",
+          "Scenarios Management",
+          "Zero Value Entry",
+          "Payroll",
+          "Budget",
+          "Reports",
+          "Excise for Dealers",
+          "Tax Invoice",
+          "F11 Features",
+          "F12 Configuration",
+          "Export Data to Excel",
+          "GST: SGST, CGST, IGST, UTGST",
+          "Practice & Assignment"
+        ]}
+      ]
+    },
+    {
+      "id": "digital-marketing",
+      "category": "marketing",
+      "tag": "Digital Marketing",
+      "level": "Beginner → Advanced",
+      "title": "Digital Marketing",
+      "summary": "From fundamentals, website planning and SEO through social media, email, PPC, affiliate & influencer marketing, growth hacking and AI-driven digital marketing — with Google Ads & Analytics practice.",
+      "meta": ["SEO & SEM", "Social, email & PPC marketing", "Google Ads & Analytics", "Growth hacking & AI marketing"],
+      "syllabus": [
+        { "heading": "Module 1", "items": [
+          "Fundamental of Digital Marketing",
+          "Website Planning & Analysis",
+          "Website Design and Development",
+          "Search Engine Optimization",
+          "Social Media Optimization",
+          "Online Reputation Management",
+          "Web Analytics",
+          "Blogging",
+          "Google AdSense",
+          "Google Adword",
+          "Video Advertising",
+          "App Store Optimization"
+        ]},
+        { "heading": "Module 2", "items": [
+          "Search Engine Marketing",
+          "Social Media Marketing",
+          "Content Marketing",
+          "Email Marketing",
+          "Mobile Marketing",
+          "E-Commerce Marketing",
+          "Pay-Per Click Marketing",
+          "Video Marketing",
+          "Affiliate Marketing",
+          "Influencer Marketing",
+          "Marketing and Sales Automation",
+          "Growth Hacking",
+          "AI Digital Marketing"
+        ]}
+      ]
+    }
+  ]
+}

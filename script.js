@@ -71,20 +71,155 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.5 });
   statNums.forEach(el => statObserver.observe(el));
 
-  /* ---------- Course filter ---------- */
-  const filterButtons = document.querySelectorAll('#courseFilter .chip');
-  const courseCards = document.querySelectorAll('#courseGrid .course-card');
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const filter = btn.dataset.filter;
-      courseCards.forEach(card => {
-        const show = filter === 'all' || card.dataset.cat === filter;
-        card.classList.toggle('is-hidden', !show);
-      });
+  /* ---------- Courses: fetch from courses.json and render ----------
+     Everything below (filter chips, course cards, the enroll form's
+     course dropdown, and the syllabus modal) is generated from one
+     data file instead of being hand-written in the HTML. If you're
+     testing by double-clicking index.html, this fetch will fail —
+     browsers block file:// pages from reading local JSON. Serve the
+     folder with a tiny local server instead, e.g.:
+       python3 -m http.server 8000
+     then open http://localhost:8000 in your browser. It works
+     normally once the site is uploaded to real hosting. */
+
+  const courseFilterEl = document.getElementById('courseFilter');
+  const courseGridEl = document.getElementById('courseGrid');
+  const courseSelectEl = document.getElementById('course');
+  const courseModal = document.getElementById('courseModal');
+
+  let courseData = null; // { categories: [...], courses: [...] }
+
+  const escapeHtml = (str) => String(str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  function renderFilterChips(categories) {
+    courseFilterEl.innerHTML = categories.map((cat, i) => `
+      <button class="chip${i === 0 ? ' is-active' : ''}" data-filter="${cat.id}">${escapeHtml(cat.label)}</button>
+    `).join('');
+  }
+
+  function renderCourseCards(courses) {
+    courseGridEl.innerHTML = courses.map(course => `
+      <article class="course-card" data-cat="${course.category}" data-course-id="${course.id}" tabindex="0" role="button" aria-label="View syllabus for ${escapeHtml(course.title)}">
+        <div class="course-card__top">
+          <span class="course-card__tag">${escapeHtml(course.tag)}</span>
+          <span class="course-card__level">${escapeHtml(course.level)}</span>
+        </div>
+        <h3>${escapeHtml(course.title)}</h3>
+        <p>${escapeHtml(course.summary)}</p>
+        <ul class="course-card__meta">
+          ${course.meta.map(m => `<li>${escapeHtml(m)}</li>`).join('')}
+        </ul>
+        <div class="course-card__row">
+          <span class="course-card__view">View syllabus <span aria-hidden="true">↗</span></span>
+          <a href="#enroll" class="course-card__cta" data-no-modal="true">Enroll <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  function renderCourseDropdown(categories, courses) {
+    if (!courseSelectEl) return;
+    const placeholder = '<option value="" disabled selected>Choose a course</option>';
+    const groups = categories
+      .filter(cat => cat.id !== 'all')
+      .map(cat => {
+        const inGroup = courses.filter(c => c.category === cat.id);
+        if (!inGroup.length) return '';
+        const options = inGroup.map(c => `<option>${escapeHtml(c.title)}</option>`).join('');
+        return `<optgroup label="${escapeHtml(cat.label)}">${options}</optgroup>`;
+      }).join('');
+    courseSelectEl.innerHTML = placeholder + groups + '<option>Not sure yet</option>';
+  }
+
+  function applyFilter(filterId) {
+    courseGridEl.querySelectorAll('.course-card').forEach(card => {
+      const show = filterId === 'all' || card.dataset.cat === filterId;
+      card.classList.toggle('is-hidden', !show);
     });
-  });
+  }
+
+  function openCourseModal(courseId) {
+    const course = courseData.courses.find(c => c.id === courseId);
+    if (!course || !courseModal) return;
+
+    document.getElementById('courseModalTag').textContent = course.tag;
+    document.getElementById('courseModalLevel').textContent = course.level;
+    document.getElementById('courseModalTitle').textContent = course.title;
+    document.getElementById('courseModalSummary').textContent = course.summary;
+
+    document.getElementById('courseModalSyllabus').innerHTML = course.syllabus.map(group => `
+      <div class="course-modal__group">
+        <h4>${escapeHtml(group.heading)}</h4>
+        <ul>${group.items.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+      </div>
+    `).join('');
+
+    courseModal.classList.add('is-open');
+    courseModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCourseModal() {
+    if (!courseModal) return;
+    courseModal.classList.remove('is-open');
+    courseModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (courseGridEl) {
+    fetch('courses.json')
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        courseData = data;
+        renderFilterChips(data.categories);
+        renderCourseCards(data.courses);
+        renderCourseDropdown(data.categories, data.courses);
+
+        // Keep the hero "courses offered" stat in sync with the real count
+        const statEl = document.getElementById('statCoursesCount');
+        if (statEl) statEl.dataset.count = String(data.courses.length);
+
+        // Filter chip clicks (delegated, since chips are rendered dynamically)
+        courseFilterEl.addEventListener('click', (e) => {
+          const btn = e.target.closest('.chip');
+          if (!btn) return;
+          courseFilterEl.querySelectorAll('.chip').forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          applyFilter(btn.dataset.filter);
+        });
+
+        // Card click/keyboard -> open syllabus modal (unless the Enroll link itself was clicked)
+        courseGridEl.addEventListener('click', (e) => {
+          if (e.target.closest('[data-no-modal]')) return;
+          const card = e.target.closest('.course-card');
+          if (card) openCourseModal(card.dataset.courseId);
+        });
+        courseGridEl.addEventListener('keydown', (e) => {
+          if (e.key !== 'Enter' && e.key !== ' ') return;
+          const card = e.target.closest('.course-card');
+          if (!card) return;
+          e.preventDefault();
+          openCourseModal(card.dataset.courseId);
+        });
+      })
+      .catch(err => {
+        console.error('Could not load courses.json:', err);
+        courseFilterEl.innerHTML = '<p class="course-status">Couldn\u2019t load the course list. If you\u2019re viewing this file directly (file://), run a local server \u2014 see the comment at the top of script.js.</p>';
+      });
+  }
+
+  if (courseModal) {
+    document.getElementById('courseModalClose').addEventListener('click', closeCourseModal);
+    document.getElementById('courseModalBackdrop').addEventListener('click', closeCourseModal);
+    document.getElementById('courseModalCta').addEventListener('click', closeCourseModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCourseModal();
+    });
+  }
 
   /* ---------- Enroll form validation ---------- */
   const form = document.getElementById('enrollForm');
