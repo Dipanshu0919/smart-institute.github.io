@@ -57,7 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       el.textContent = Math.round(eased * target).toLocaleString() + suffix;
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.dataset.animated = 'true';
+      }
     };
     requestAnimationFrame(step);
   };
@@ -139,6 +143,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function selectCourseInForm(title) {
+    if (!courseSelectEl) return;
+    const match = Array.from(courseSelectEl.options).find(opt => opt.textContent === title);
+    if (match) courseSelectEl.value = title;
+  }
+
+  function getVisibleCourseIds() {
+    return Array.from(courseGridEl.querySelectorAll('.course-card:not(.is-hidden)'))
+      .map(card => card.dataset.courseId);
+  }
+
   function openCourseModal(courseId) {
     const course = courseData.courses.find(c => c.id === courseId);
     if (!course || !courseModal) return;
@@ -155,6 +170,26 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `).join('');
 
+    courseModal.dataset.currentId = courseId;
+
+    // Wire the Enroll link + wrap-around Prev/Next through whatever's
+    // currently visible (so navigation respects the active filter chip).
+    const visibleIds = getVisibleCourseIds();
+    const idx = visibleIds.indexOf(courseId);
+    const prevBtn = document.getElementById('courseModalPrev');
+    const nextBtn = document.getElementById('courseModalNext');
+    if (visibleIds.length > 1 && idx !== -1) {
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+      prevBtn.onclick = () => openCourseModal(visibleIds[(idx - 1 + visibleIds.length) % visibleIds.length]);
+      nextBtn.onclick = () => openCourseModal(visibleIds[(idx + 1) % visibleIds.length]);
+    } else {
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+    }
+
+    const panel = document.querySelector('.course-modal__panel');
+    if (panel) panel.scrollTop = 0;
     courseModal.classList.add('is-open');
     courseModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -181,7 +216,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Keep the hero "courses offered" stat in sync with the real count
         const statEl = document.getElementById('statCoursesCount');
-        if (statEl) statEl.dataset.count = String(data.courses.length);
+        if (statEl) {
+          const count = data.courses.length;
+          statEl.dataset.count = String(count);
+          // If the count-up already finished (e.g. fetch was slower than
+          // scroll-into-view) with the HTML's fallback number, correct it now.
+          if (statEl.dataset.animated === 'true') {
+            statEl.textContent = count.toLocaleString() + (statEl.dataset.suffix || '');
+          }
+        }
 
         // Filter chip clicks (delegated, since chips are rendered dynamically)
         courseFilterEl.addEventListener('click', (e) => {
@@ -194,8 +237,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Card click/keyboard -> open syllabus modal (unless the Enroll link itself was clicked)
         courseGridEl.addEventListener('click', (e) => {
-          if (e.target.closest('[data-no-modal]')) return;
+          const enrollLink = e.target.closest('[data-no-modal]');
           const card = e.target.closest('.course-card');
+          if (enrollLink) {
+            const course = courseData.courses.find(c => c.id === card?.dataset.courseId);
+            if (course) selectCourseInForm(course.title);
+            return;
+          }
           if (card) openCourseModal(card.dataset.courseId);
         });
         courseGridEl.addEventListener('keydown', (e) => {
@@ -215,9 +263,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (courseModal) {
     document.getElementById('courseModalClose').addEventListener('click', closeCourseModal);
     document.getElementById('courseModalBackdrop').addEventListener('click', closeCourseModal);
-    document.getElementById('courseModalCta').addEventListener('click', closeCourseModal);
+    document.getElementById('courseModalCta').addEventListener('click', () => {
+      const course = courseData?.courses.find(c => c.id === courseModal.dataset.currentId);
+      if (course) selectCourseInForm(course.title);
+      closeCourseModal();
+    });
     document.addEventListener('keydown', (e) => {
+      if (!courseModal.classList.contains('is-open')) return;
       if (e.key === 'Escape') closeCourseModal();
+      if (e.key === 'ArrowLeft') document.getElementById('courseModalPrev').click();
+      if (e.key === 'ArrowRight') document.getElementById('courseModalNext').click();
     });
   }
 
