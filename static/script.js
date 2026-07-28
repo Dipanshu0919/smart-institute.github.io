@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Logo swap helper ----------
      Paste your logo URL below (between the quotes) and the image
      will automatically replace the placeholder mark in the header/footer. */
-  const LOGO_URL = "smartech logo.png"; // place this file in the same folder as index.html
+  const LOGO_URL = "/static/smartech%20logo.png"; // place this file in the static folder
 
   if (LOGO_URL) {
     const img = document.getElementById('brandLogoImg');
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (courseGridEl) {
-    fetch('courses.json')
+    fetch('/static/courses.json')
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -312,10 +312,41 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // No backend wired up yet — show confirmation and reset.
-      successMsg.hidden = false;
-      form.reset();
-      setTimeout(() => { successMsg.hidden = true; }, 6000);
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      fetch('/api/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: form.fullName.value.trim(),
+          phone: form.phone.value.trim(),
+          email: form.email.value.trim(),
+          course: form.course.value,
+          message: form.message.value.trim()
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        
+        if (data.success) {
+          successMsg.hidden = false;
+          form.reset();
+          setTimeout(() => { successMsg.hidden = true; }, 6000);
+        } else {
+          alert('Error: ' + data.message);
+        }
+      })
+      .catch(err => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      });
     });
   }
 

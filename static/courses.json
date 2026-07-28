@@ -13,10 +13,10 @@
       "id": "java-fullstack",
       "category": "fullstack",
       "tag": "Full Stack Development",
-      "level": "Beginner → Job-ready",
+      "level": "",
       "title": "Java Full Stack Development",
       "summary": "Front-end: HTML, CSS, JavaScript with Angular or Vue.js. Back-end: Node.js with MongoDB, ending in live website hosting.",
-      "meta": ["Angular / Vue.js", "Node.js + MongoDB", "Live hosting"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Front-End Development", "items": ["HTML, CSS, JavaScript", "Front-End Framework: Angular", "Front-End Framework: Vue.js"] },
         { "heading": "Back-End Development", "items": ["Node.js", "Database Connectivity Tools: MongoDB", "Live Website Hosting"] }
@@ -26,10 +26,10 @@
       "id": "php-fullstack",
       "category": "fullstack",
       "tag": "Full Stack Development",
-      "level": "Beginner → Job-ready",
+      "level": "",
       "title": "PHP Full Stack Development",
       "summary": "Front-end: HTML, CSS, JavaScript with React or Bootstrap. Back-end: PHP with MySQL, ending in live website hosting.",
-      "meta": ["React / Bootstrap", "PHP + MySQL", "Live hosting"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Front-End Development", "items": ["HTML, CSS, JavaScript", "Front-End Framework: React", "Front-End Framework: Bootstrap"] },
         { "heading": "Back-End Development", "items": ["PHP", "Database Connectivity Tools: MySQL", "Live Website Hosting"] }
@@ -39,10 +39,10 @@
       "id": "python-fullstack",
       "category": "fullstack",
       "tag": "Full Stack Development",
-      "level": "Beginner → Job-ready",
+      "level": "",
       "title": "Python Full Stack Development",
       "summary": "Front-end: HTML, CSS, JavaScript with React. Back-end: Python with Django/Flask and SQL, ending in live website hosting.",
-      "meta": ["React", "Django / Flask + SQL", "Live hosting"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Front-End Development", "items": ["HTML, CSS, JavaScript", "Front-End Framework: React"] },
         { "heading": "Back-End Development", "items": ["Python, Django / Flask", "Database Connectivity Tools: SQL", "Live Website Hosting"] }
@@ -52,10 +52,10 @@
       "id": "web-programming",
       "category": "dev",
       "tag": "Web Development",
-      "level": "Beginner",
+      "level": "",
       "title": "Web Programming",
       "summary": "Notepad and Sublime workflow through HTML5, CSS3, JavaScript, PHP, WordPress and advanced internet skills.",
-      "meta": ["HTML5, CSS3, JS, PHP", "WordPress", "Website hosting (FTP)", "Live projects"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Notepad", "Sublime", "HTML5", "CSS3", "Java Script", "PHP", "WordPress", "Advance Internet", "Website Hosting (FTP)", "Live Projects"] }
       ]
@@ -64,10 +64,10 @@
       "id": "c-cpp",
       "category": "dev",
       "tag": "Programming",
-      "level": "Beginner",
+      "level": "",
       "title": "C & C++ Programming",
       "summary": "Core programming logic, data structures and problem-solving — the foundation most tech careers start on.",
-      "meta": ["Practice assignments", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Programming fundamentals", "Control structures & functions", "Arrays, pointers & structures", "Object-oriented basics (C++)", "Data structures fundamentals", "Practice assignments & exam"] }
       ]
@@ -76,10 +76,10 @@
       "id": "core-advance-java",
       "category": "dev",
       "tag": "Programming",
-      "level": "Beginner → Advanced",
+      "level": "",
       "title": "Core & Advance Java",
       "summary": "Object-oriented fundamentals through advanced concepts — ready for interviews and Java full-stack work.",
-      "meta": ["Interview prep", "Mock tests"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Core Java: OOP, collections, exception handling", "Multithreading & file handling", "Advance Java: Servlets & JSP basics", "Database connectivity (JDBC)", "Interview preparation & mock tests"] }
       ]
@@ -88,10 +88,10 @@
       "id": "dotnet",
       "category": "dev",
       "tag": "Programming",
-      "level": "Intermediate",
+      "level": "",
       "title": ".Net Programming",
       "summary": "C# and the .Net framework for building enterprise-style desktop and web applications.",
-      "meta": ["Hands-on projects", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["C# language fundamentals", "Object-oriented programming in .Net", "Windows Forms / desktop applications", "ASP.Net web application basics", "Hands-on project work"] }
       ]
@@ -100,10 +100,10 @@
       "id": "mysql",
       "category": "dev",
       "tag": "Database",
-      "level": "Beginner",
+      "level": "",
       "title": "MySQL",
       "summary": "Relational database design, queries and administration — the database skill every developer needs.",
-      "meta": ["Query practice", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Database design fundamentals", "SQL queries & joins", "Stored procedures & functions", "Indexing & performance basics", "Database administration basics"] }
       ]
@@ -112,10 +112,10 @@
       "id": "python-programming",
       "category": "dev",
       "tag": "Programming",
-      "level": "Beginner",
+      "level": "",
       "title": "Python Programming",
       "summary": "Core syntax to automation, file handling and APIs — a strong base for web, data and DevOps work alike.",
-      "meta": ["Mini projects", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Python syntax & core concepts", "Functions, file handling & modules", "Automation scripting", "Working with APIs", "Mini projects & assignments"] }
       ]
@@ -124,10 +124,10 @@
       "id": "cloud-devops",
       "category": "cloud",
       "tag": "Cloud & DevOps",
-      "level": "Beginner → Advanced",
+      "level": "",
       "title": "Cloud Computing & DevOps",
       "summary": "A four-module program: Windows Server & Linux networking, core cloud concepts across AWS/Azure/GCP, hands-on Azure & AWS administration, and DevOps & cloud architecture.",
-      "meta": ["Module 1: Win Server & Linux Networks", "Module 2: Core Cloud Concepts", "Module 3: Azure & AWS Administration", "Module 4: DevOps & Cloud Architecture"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Module 1 — Win Server & Linux Networks", "items": [
           "Basics of Server Management",
@@ -185,10 +185,10 @@
       "id": "hardware-networking",
       "category": "infra",
       "tag": "A+ N+",
-      "level": "Beginner",
+      "level": "",
       "title": "Computer Hardware & Networking",
       "summary": "CompTIA A+ and Network+ foundations — hardware troubleshooting and core networking concepts.",
-      "meta": ["Hands-on hardware labs", "Exam guidance"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["PC hardware assembly & troubleshooting", "Operating system installation & support", "Networking fundamentals", "Network devices & cabling", "TCP/IP basics", "Exam-oriented practice"] }
       ]
@@ -197,10 +197,10 @@
       "id": "ccna",
       "category": "infra",
       "tag": "CCNA",
-      "level": "Beginner → CCNA",
+      "level": "",
       "title": "Cisco Certified Network Associate",
       "summary": "Routing, switching and network fundamentals on real lab hardware, mapped to official CCNA topics.",
-      "meta": ["Lab hours included", "Exam guidance"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Networking fundamentals", "Routing & switching concepts", "IP addressing & subnetting", "Network security fundamentals", "Automation & programmability basics", "Hands-on lab practice"] }
       ]
@@ -209,10 +209,10 @@
       "id": "mcsa",
       "category": "infra",
       "tag": "MCSA",
-      "level": "Intermediate",
+      "level": "",
       "title": "Microsoft Certified Solutions Associate",
       "summary": "Windows Server administration and management, mapped to Microsoft's official certification path.",
-      "meta": ["Exam guidance", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Windows Server installation & configuration", "Active Directory administration", "Storage & file services", "Network services administration", "Exam-oriented practice"] }
       ]
@@ -221,10 +221,10 @@
       "id": "linux-redhat",
       "category": "infra",
       "tag": "Linux",
-      "level": "Intermediate",
+      "level": "",
       "title": "Red Hat & Kali Linux Administration",
       "summary": "Linux system administration on Red Hat and Kali — the OS skills behind every server and security role.",
-      "meta": ["Hands-on labs", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Linux fundamentals & shell scripting", "User & file system administration", "Red Hat server administration", "Kali Linux security tools overview", "Hands-on lab practice"] }
       ]
@@ -233,10 +233,10 @@
       "id": "ceh",
       "category": "infra",
       "tag": "C|EH",
-      "level": "Intermediate",
+      "level": "",
       "title": "Certified Ethical Hacker",
       "summary": "Vulnerability assessment and penetration testing fundamentals, practiced in a contained lab environment.",
-      "meta": ["Lab environment", "Practical exam"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Ethical hacking fundamentals & footprinting", "Scanning networks & vulnerability analysis", "System hacking techniques", "Web application & network attacks", "Practical lab exercises & exam prep"] }
       ]
@@ -245,10 +245,10 @@
       "id": "chfi",
       "category": "infra",
       "tag": "C|HFI",
-      "level": "Advanced",
+      "level": "",
       "title": "Computer Hacking Forensic Investigator",
       "summary": "Digital forensics — evidence collection, incident investigation and reporting for cybersecurity incidents.",
-      "meta": ["Case-based labs", "Exam guidance"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Computer forensics fundamentals", "Evidence collection & chain of custody", "Investigating file systems & operating systems", "Network & cloud forensics basics", "Case-based lab exercises"] }
       ]
@@ -257,10 +257,10 @@
       "id": "cnd",
       "category": "infra",
       "tag": "C|ND",
-      "level": "Intermediate",
+      "level": "",
       "title": "Certified Network Defender",
       "summary": "Defensive network security — protecting, detecting and responding to threats across an organization's network.",
-      "meta": ["Defense-focused labs", "Exam guidance"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Network security fundamentals & protocols", "Network defense management", "Threat detection & response", "Firewalls, IDS/IPS & VPN basics", "Defense-focused lab exercises"] }
       ]
@@ -269,10 +269,10 @@
       "id": "cct",
       "category": "infra",
       "tag": "C|CT",
-      "level": "Beginner → Intermediate",
+      "level": "",
       "title": "Certified Cybersecurity Technician",
       "summary": "Entry-level cybersecurity fundamentals across networking, security operations and system administration.",
-      "meta": ["Foundational labs", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Information security fundamentals", "Network security basics", "Identity & access management basics", "Security operations fundamentals", "Foundational lab exercises"] }
       ]
@@ -281,10 +281,10 @@
       "id": "eces",
       "category": "infra",
       "tag": "E|CES",
-      "level": "Advanced",
+      "level": "",
       "title": "Certified Encryption Specialist",
       "summary": "Cryptography fundamentals and applied encryption techniques used to secure data and communications.",
-      "meta": ["Applied cryptography labs", "Exam guidance"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Cryptography fundamentals", "Symmetric & asymmetric encryption", "Hashing algorithms", "PKI and digital certificates", "Applied cryptography lab exercises"] }
       ]
@@ -293,10 +293,10 @@
       "id": "cpent",
       "category": "infra",
       "tag": "C|PENT",
-      "level": "Advanced",
+      "level": "",
       "title": "Certified Penetration Testing Professional",
       "summary": "Advanced, hands-on penetration testing across networks, applications and cloud environments.",
-      "meta": ["Advanced lab environment", "Practical exam"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": ["Advanced network penetration testing", "Web application penetration testing", "Cloud penetration testing basics", "Exploitation & post-exploitation techniques", "Advanced hands-on lab exercises"] }
       ]
@@ -305,10 +305,10 @@
       "id": "office-automation",
       "category": "office",
       "tag": "DCA",
-      "level": "Beginner",
+      "level": "",
       "title": "Advance Office Automation",
       "summary": "Computer basics, English typing, Notepad/WordPad, MS Word, Excel & PowerPoint, printing, hardware and network concepts, and internet skills (email, surfing, downloading, uploading).",
-      "meta": ["MS Word, Excel, PowerPoint", "Internet & email skills", "Assignment & exam"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": [
           "Computer Basics",
@@ -329,10 +329,10 @@
       "id": "advanced-excel",
       "category": "office",
       "tag": "Office Tools",
-      "level": "Intermediate",
+      "level": "",
       "title": "Advanced Excel",
       "summary": "Data consolidation, validation, H/VLookup, workbook sharing & protection, automation, goal seek, references & links, pivot tables, macros, what-if analysis, data tables and scenarios.",
-      "meta": ["Pivot tables & macros", "Lookups & what-if analysis", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": [
           "Consolidate Data",
@@ -359,10 +359,10 @@
       "id": "graphics-dtp",
       "category": "office",
       "tag": "Design",
-      "level": "Beginner",
+      "level": "",
       "title": "Graphics (DTP)",
       "summary": "Typing in Hindi/Marathi/English, MS Paint, CorelDRAW (logos, banners, visiting & wedding cards), Photoshop (photo editing, posters, text effects) and Illustrator.",
-      "meta": ["CorelDRAW & Photoshop", "Illustrator", "Assignment & project"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": [
           "Typing (Hindi/Marathi/English)",
@@ -379,10 +379,10 @@
       "id": "tally-erp9",
       "category": "office",
       "tag": "Tally ERP 9",
-      "level": "Beginner",
+      "level": "",
       "title": "Tally ERP 9 — Financial Accounting",
       "summary": "Intro to accounting, company creation, trial balance, order processing, voucher entries, godown & stock journal, receipt/delivery notes, price lists, batch details, tax ledger and cheque printing.",
-      "meta": ["Voucher & inventory entries", "Tax ledger & cheque printing", "Certificate included"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": [
           "Introduction to Accounting",
@@ -410,10 +410,10 @@
       "id": "tally-prime-gst",
       "category": "office",
       "tag": "Tally Prime",
-      "level": "Beginner → Intermediate",
+      "level": "",
       "title": "Advance Tally Prime & GST",
       "summary": "Ledgers, stock & voucher entry, multi-currency, cost centers, point of sale, payroll, budgets and reports, plus full GST — SGST, CGST, IGST and UTGST — with F11/F12 configuration.",
-      "meta": ["SGST, CGST, IGST, UTGST", "Payroll & point of sale", "Practical entries"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Curriculum", "items": [
           "Ledger",
@@ -447,10 +447,10 @@
       "id": "digital-marketing",
       "category": "marketing",
       "tag": "Digital Marketing",
-      "level": "Beginner → Advanced",
+      "level": "",
       "title": "Digital Marketing",
       "summary": "From fundamentals, website planning and SEO through social media, email, PPC, affiliate & influencer marketing, growth hacking and AI-driven digital marketing — with Google Ads & Analytics practice.",
-      "meta": ["SEO & SEM", "Social, email & PPC marketing", "Google Ads & Analytics", "Growth hacking & AI marketing"],
+      "meta": ["Certificate included", "Career Based Course"],
       "syllabus": [
         { "heading": "Module 1", "items": [
           "Fundamental of Digital Marketing",
