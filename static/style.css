@@ -148,12 +148,15 @@ img{ max-width: 100%; display: block; }
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  min-height: 80px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .brand{
   display: flex;
   align-items: center;
+  align-self: stretch;
+  height: 100%;
   gap: 10px;
   /* This is the standard "full-bleed" trick: it measures how far this row
      sits from the true edge of the browser window (whether that's because
@@ -164,7 +167,17 @@ img{ max-width: 100%; display: block; }
   padding-left: 16px;
 }
 .brand__mark{ color: var(--ink-navy); display: flex; }
-.brand__logo-img{ height: 56px; width: auto; max-width: 230px; object-fit: contain; }
+.brand__logo-img{
+  height: 90%;
+  width: auto;
+  max-width: 230px;
+  object-fit: contain;
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+  transform: scale(1.14);
+  transform-origin: center;
+}
 .brand__word{
   font-family: var(--font-display);
   font-weight: 700;
@@ -247,15 +260,21 @@ img{ max-width: 100%; display: block; }
    let flex items shrink (default min-width:auto blocks that) and scale
    the logo/wordmark/button down instead of spilling off-screen. */
 .header-inner{ min-width: 0; }
-.brand{ min-width: 0; flex-shrink: 1; overflow: hidden; }
+.brand{ min-width: 0; flex-shrink: 1; overflow: visible; }
 .brand__mark, .brand__logo-img{ flex-shrink: 0; }
 .brand__word{ min-width: 0; overflow: hidden; }
 .header-actions{ flex-shrink: 0; }
 
 @media (max-width: 480px){
-  .header-inner{ gap: 8px; padding-top: 10px; padding-bottom: 10px; }
+  .header-inner{ gap: 8px; min-height: 64px; padding-top: 0; padding-bottom: 0; }
   .brand{ gap: 6px; }
-  .brand__logo-img{ height: 44px; max-width: 150px; }
+  .brand__logo-img{
+    height: 100%;
+    max-width: 150px;
+    margin-top: 0;
+    margin-bottom: 0;
+    transform: scale(1.12);
+  }
   .brand__mark svg{ width: 28px; height: 28px; }
   .brand__word{ font-size: 0.8rem; white-space: nowrap; text-overflow: ellipsis; }
   .brand__word em{ font-size: 0.54rem; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }

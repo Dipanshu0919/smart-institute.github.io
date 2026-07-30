@@ -109,7 +109,6 @@ def admin_logout():
     return redirect(url_for('admin_login'))
 
 @app.route('/dashboard')
-@login_required
 def admin_dashboard():
     conn = get_db()
     enrollments = conn.execute(
