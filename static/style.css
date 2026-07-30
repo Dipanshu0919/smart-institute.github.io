@@ -142,6 +142,7 @@ img{ max-width: 100%; display: block; }
   background: rgba(247,245,240,0.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(15,27,45,0.08);
+  overflow: hidden;
 }
 .header-inner{
   display: flex;
