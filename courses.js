@@ -1,4 +1,4 @@
-{
+const COURSE_DATA ={
   "categories": [
     { "id": "all", "label": "All" },
     { "id": "fullstack", "label": "Full Stack Development" },
