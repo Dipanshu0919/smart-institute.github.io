@@ -146,6 +146,12 @@ window.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.5 });
   statNums.forEach(el => statObserver.observe(el));
 
+  function dev_by() {
+        const encoded =
+          "LSBEZXZlbG9wZWQgYnk6IERpcGFuc2h1IEFzaG9rIEFnYXJ3YWwKLSBNb2JpbGU6ICs5MTg1NTQwNDg4MzYKLSBHaXRodWI6IGh0dHBzOi8vZ2l0aHViLmNvbS9kaXBhbnNodTA5MTk=";
+        console.log(atob(encoded));
+      }
+
   const courseFilterEl = document.getElementById('courseFilter');
   const courseGridEl = document.getElementById('courseGrid');
   const courseModal = document.getElementById('courseModal');
