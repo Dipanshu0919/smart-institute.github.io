@@ -142,7 +142,7 @@ img{ max-width: 100%; display: block; }
   background: rgba(247,245,240,0.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(15,27,45,0.08);
-  overflow: hidden;
+  overflow: visible;
 }
 .header-inner{
   display: flex;
@@ -596,6 +596,85 @@ img{ max-width: 100%; display: block; }
   .course-modal__panel{ max-width: none; max-height: none; height: 100%; border-radius: 0; }
 }
 
+/* ============ PARTNERS ============ */
+.partners{ padding: clamp(48px, 10vw, 90px) 0 24px; }
+.partners__shell{
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(15,27,45,0.08);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.55);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.partners__shell::before,
+.partners__shell::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 90px;
+  z-index: 2;
+  pointer-events: none;
+}
+.partners__shell::before{
+  left: 0;
+  background: linear-gradient(90deg, rgba(247,245,240,1) 0%, rgba(247,245,240,0) 100%);
+}
+.partners__shell::after{
+  right: 0;
+  background: linear-gradient(270deg, rgba(247,245,240,1) 0%, rgba(247,245,240,0) 100%);
+}
+.partners__track{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: max-content;
+  min-width: 100%;
+  padding: 22px 8px;
+  will-change: transform;
+  cursor: grab;
+  user-select: none;
+  animation: partner-scroll 40s linear infinite;
+}
+.partners__track.dragging{ cursor: grabbing; }
+.partners__track.is-paused{ animation-play-state: paused; }
+@keyframes partner-scroll{
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.partner-card{
+  position: relative;
+  flex: 0 0 clamp(180px, 23vw, 240px);
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: var(--white);
+  border: 1px solid rgba(15,27,45,0.08);
+  padding: 18px 20px;
+  box-shadow: 0 12px 28px -24px rgba(15,27,45,0.26);
+  scroll-snap-align: center;
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.partner-card:hover{ transform: translateY(-4px); border-color: rgba(43,196,177,0.5); box-shadow: 0 16px 32px -24px rgba(15,27,45,0.3); }
+.partner-card img{
+  width: 100%;
+  height: 82px;
+  object-fit: contain;
+  filter: none;
+  opacity: 1;
+  transition: transform 0.25s var(--ease), filter 0.25s var(--ease);
+}
+.partner-card:hover img{
+  transform: scale(1.03);
+  filter: saturate(1.1) contrast(1.04);
+}
+@media (max-width: 700px){
+  .partners__shell::before,
+  .partners__shell::after{ width: 50px; }
+  .partner-card{ flex-basis: clamp(150px, 42vw, 210px); min-height: 110px; }
+}
+
 /* ============ WHY US ============ */
 .why{ background: var(--ink-navy); color: var(--paper); padding: clamp(48px, 10vw, 90px) 0; }
 .why-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
@@ -651,17 +730,18 @@ img{ max-width: 100%; display: block; }
   .path-track{ grid-template-columns: 1fr; gap: 28px; }
 }
 
-/* ============ ENROLL / CONTACT ============ */
-.enroll{ padding: clamp(48px, 10vw, 90px) 0; }
-.enroll__grid{
+/* ============ CONTACT ============ */
+.contact-section{
+  padding: clamp(48px, 10vw, 90px) 0 24px;
+}
+.contact-section__grid{
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   gap: clamp(32px, 8vw, 56px);
   align-items: start;
 }
-@media (max-width: 900px){ .enroll__grid{ grid-template-columns: 1fr; align-items: stretch; } }
-.enroll__info h2{ font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 14px; }
-.enroll__sub{ color: var(--ink-mid); margin-bottom: 30px; max-width: 440px; }
+.contact-section__info h2{ font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 14px; }
+.contact-section__sub{ color: var(--ink-mid); margin-bottom: 30px; max-width: 440px; }
 
 .contact-list{ display: flex; flex-direction: column; gap: 16px; }
 .contact-list li{ display: flex; flex-direction: column; gap: 2px; }
@@ -694,7 +774,19 @@ img{ max-width: 100%; display: block; }
   padding: 0;
 }
 
+@media (max-width: 900px){
+  .contact-section__grid{ grid-template-columns: 1fr; align-items: stretch; }
+}
+
+/* ============ ENROLL ============ */
+.enroll{ padding: clamp(36px, 8vw, 70px) 0 clamp(48px, 10vw, 90px); }
+.section-head--center{ text-align: left; margin-bottom: 26px; }
+.section-head--center .eyebrow{ margin-bottom: 10px; }
+.section-head--center h2{ max-width: 740px; margin: 0; }
+
 .enroll-form{
+  max-width: 760px;
+  margin: 0;
   background: var(--white);
   border: 1px solid rgba(15,27,45,0.08);
   border-radius: var(--radius);

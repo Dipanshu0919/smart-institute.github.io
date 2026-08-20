@@ -21,6 +21,7 @@
 
     <nav class="main-nav" id="mainNav">
       <a href="#courses">Courses</a>
+      <a href="#partners">Partners</a>
       <a href="#why">Why Us</a>
       <a href="#path">How It Works</a>
       <a href="#contact">Contact</a>
@@ -30,7 +31,7 @@
     <div class="header-actions">
       <a href="#contact" class="btn btn--ghost hide-mobile">Talk to a mentor</a>
       <a href="#enroll" class="btn btn--solid hide-mobile">Enroll now</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -139,6 +140,19 @@
     </div>
   </div>
 
+  <!-- ============ PARTNERS ============ -->
+  <section class="partners" id="partners">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--dark">Partners</p>
+        <h2>Backed by real collaborators, recruiters, and learning partners.</h2>
+      </div>
+      <div class="partners__shell">
+        <div class="partners__track" id="partnersTrack" aria-label="Partner logo carousel"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ WHY US ============ -->
   <section class="why" id="why">
     <div class="wrap">
@@ -164,17 +178,46 @@
         </div>
         <div class="why-card">
           <div class="why-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 40 40"><rect x="7" y="9" width="26" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 15 H33" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="12" r="1.2" fill="currentColor"/></svg>
-          </div>
-          <h3>Mentors who still build</h3>
-          <p>Trainers currently working in dev, data and networking roles — not full-time instructors reading slides.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-card__icon" aria-hidden="true">
             <svg viewBox="0 0 40 40"><path d="M20 6 L33 12 V22 C33 29 27 33 20 34 C13 33 7 29 7 22 V12 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 20 L18 24 L27 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <h3>Placement support, not just a certificate</h3>
           <p>Resume reviews, mock interviews and active help connecting you with local hiring opportunities as you finish your course.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M20 5 C15 8, 12 12, 12 18 C12 25, 16 29, 20 35 C24 29, 28 25, 28 18 C28 12, 25 8, 20 5 Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="18" r="6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <h3>Free Demo Class</h3>
+          <p>Experience the teaching style and learning flow before you commit, so you feel confident from day one.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M12 28 V16 H18 L20 12 L22 16 H28 V28" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 28 V22 H26 V28" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <h3>Free Career Guidance</h3>
+          <p>Get honest recommendations on the best-fit course, job path, and timeline based on your goals and background.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><circle cx="20" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 31 C11 24, 15 22, 20 22 C25 22, 29 24, 31 31" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 18 L18 22 L26 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Personality Development</h3>
+          <p>Build communication, confidence and professional habits that help you stand out in classrooms and interviews.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M9 28 L17 20 L20 23 L31 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 28 H31 V12" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <h3>Interview Preparation</h3>
+          <p>Practice real question patterns, mock rounds, and presentation skills that improve your confidence before hiring calls.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M20 6 A14 14 0 1 1 20 34 A14 14 0 1 1 20 6 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 10 V20 L26 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 20 H20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Counselling &amp; Mentorship</h3>
+          <p>Regular guidance from mentors who help you stay focused, track progress, and resolve doubts before they become roadblocks.</p>
         </div>
       </div>
     </div>
@@ -214,25 +257,29 @@
   </section>
 
   <!-- ============ CONTACT ============ -->
-  <section class="enroll" id="enroll">
-    <div class="wrap enroll__grid">
-      <div class="enroll__info">
-        <p class="eyebrow">Get started</p>
-        <h2>Tell us what you want to build. We'll map the course to it.</h2>
-        <p class="enroll__sub">Reach out directly below to book your spot, ask about batches, or request a callback.</p>
+  <section class="contact-section" id="contact">
+    <div class="wrap contact-section__grid">
+      <div class="contact-section__info">
+        <p class="eyebrow">Location and Contact</p>
+        <h2>Visit the institute or talk to us directly.</h2>
+        <p class="contact-section__sub">Reach out to book your spot, ask about batches, or request a callback.</p>
 
-        <ul class="contact-list" id="contact">
+        <ul class="contact-list">
           <li>
-            <span class="contact-list__label">Visit</span>
-            <span>Near Prakash Talkies, Side by ICICI Bank, 1st Floor, Palghar West, Maharashtra, 401404</span>
+            <span class="contact-list__label">Visit Smartech Training Institute</span>
+            <span>1st floor, shiv Kalyan building, Smartech Training Institute, Mahim Rd, nr. Sharda Hospital, Palghar, Maharashtra 401404</span>
           </li>
           <li>
             <span class="contact-list__label">Call</span>
-            <span><a href="tel:+919221204466">+91 7559153970</a></span>
+            <span><a href="tel:+917559153970">+91 7559153970</a> OR <a href="tel:+918624915397">+91 8624915397</a></span>
           </li>
           <li>
             <span class="contact-list__label">Email</span>
             <span><a href="mailto:smartechtraininginstitute@gmail.com">smartechtraininginstitute@gmail.com</a></span>
+          </li>
+          <li>
+            <span class="contact-list__label">Website</span>
+            <span><a href="https://www.smartechtraininginstitute.in" target="_blank" rel="noopener noreferrer">www.smartechtraininginstitute.in</a></span>
           </li>
           <li>
             <span class="contact-list__label">Hours</span>
@@ -240,9 +287,68 @@
           </li>
         </ul>
       </div>
+
       <div class="map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d939.1018035394727!2d72.76652186471972!3d19.695279877203564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71cc28eb38b81%3A0x9b214ea91a4f33be!2sEmpire%20Architects!5e0!3m2!1sen!2sin!4v1785841628094!5m2!1sen!2sin" width="600" height="450" style="border:0; width:100%; max-width:100%; height:450px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3756.4104710236434!2d72.76730189999999!3d19.6951411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71da04be0be67%3A0xef87d40f056ff29!2sSmartech%20Training%20Institute!5e0!3m2!1sen!2sin!4v1787222248745!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ ENROLL ============ -->
+  <section class="enroll" id="enroll">
+    <div class="wrap">
+      <div class="section-head section-head--center">
+        <p class="eyebrow eyebrow--dark">Enroll now</p>
+        <h2>Tell us what you want to build. We'll map the course to it.</h2>
+      </div>
+
+      <form class="enroll-form" id="enrollForm" action="https://formsubmit.co/smartechtraininginstitute@gmail.com" method="POST" novalidate>
+        <div class="form-row">
+          <label for="fullName">Name of Applicant</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Your full name" required>
+          <span class="form-error" data-error-for="fullName"></span>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div>
+            <label for="phone">Contact number</label>
+            <input type="tel" id="phone" name="phone" placeholder="10-digit number" required>
+            <span class="form-error" data-error-for="phone"></span>
+          </div>
+          <div>
+            <label for="qualification">Education / Qualification</label>
+            <input type="text" id="qualification" name="qualification" placeholder="e.g. B.Com, Diploma, 12th" required>
+            <span class="form-error" data-error-for="qualification"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+          <span class="form-error" data-error-for="address"></span>
+        </div>
+
+        <div class="form-row">
+          <label for="course">Course of interest</label>
+          <select id="course" name="course" required>
+            <option value="" disabled selected>Choose a course</option>
+          </select>
+          <span class="form-error" data-error-for="course"></span>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Remark / Your query</label>
+          <textarea id="message" name="message" rows="4" placeholder="Write your query or remark here" required></textarea>
+          <span class="form-error" data-error-for="message"></span>
+        </div>
+
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_subject" value="New Enrollment Inquiry - Smartech Training Institute">
+
+        <button type="submit" class="btn btn--solid btn--lg btn--full">Request a callback</button>
+        <p class="form-success" id="formSuccess" role="status" aria-live="polite" hidden>You're on the list — a counsellor will call you within one working day.</p>
+      </form>
     </div>
   </section>
 
@@ -257,6 +363,7 @@
     </div>
     <nav class="footer-nav">
       <a href="#courses">Courses</a>
+      <a href="#partners">Partners</a>
       <a href="#why">Why Us</a>
       <a href="#path">How It Works</a>
       <a href="#contact">Contact</a>

@@ -11,6 +11,28 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
+function populateCourseSelect() {
+  const courseSelect = document.getElementById('course');
+  if (!courseSelect || !COURSE_DATA) return;
+
+  const html = COURSE_DATA.categories
+    .filter(category => category.id !== 'all')
+    .map(category => {
+      const courses = COURSE_DATA.courses.filter(course => course.category === category.id);
+      if (!courses.length) return '';
+
+      const options = courses.map(course => `
+        <option value="${escapeHtml(course.title)}">${escapeHtml(course.title)}</option>
+      `).join('');
+
+      return `<optgroup label="${escapeHtml(category.label)}">${options}</optgroup>`;
+    })
+    .filter(Boolean)
+    .join('');
+
+  courseSelect.innerHTML = `<option value="" disabled selected>Choose a course</option>${html}`;
+}
+
 function renderFilterChips(categories) {
   const courseFilterEl = document.getElementById('courseFilter');
   courseFilterEl.innerHTML = categories.map((cat, i) => `
@@ -36,6 +58,17 @@ function renderCourseCards(courses) {
       </div>
     </article>
   `).join('');
+}
+
+function applyFilter(filterId) {
+  const courseGridEl = document.getElementById('courseGrid');
+  courseGridEl.querySelectorAll('.course-card').forEach(card => {
+    if (filterId === 'all' || card.dataset.cat === filterId) {
+      card.classList.remove('is-hidden');
+    } else {
+      card.classList.add('is-hidden');
+    }
+  });
 }
 
 function getVisibleCourseIds() {
@@ -90,6 +123,87 @@ function closeCourseModal() {
   document.body.style.overflow = '';
 }
 
+async function buildPartners() {
+  const track = document.getElementById('partnersTrack');
+  if (!track) return;
+
+  const getPartnerImages = async () => {
+    try {
+      const response = await fetch('clients/', { cache: 'no-store' });
+      if (!response.ok) return [];
+
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return [...doc.querySelectorAll('a[href]')]
+        .map(link => link.getAttribute('href'))
+        .filter(href => /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(href || ''))
+        .map(href => new URL(href, response.url).href)
+        .filter((value, index, arr) => arr.indexOf(value) === index);
+    } catch (error) {
+      return [];
+    }
+  };
+
+  const fallbackCards = Array.from({ length: 5 }, () => '');
+  const partnerFiles = await getPartnerImages();
+  const items = partnerFiles.length ? partnerFiles : fallbackCards;
+
+  const cards = [...items, ...items].map((src, index) => {
+    const isImage = typeof src === 'string' && /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(src);
+    const label = isImage ? `Client ${index % items.length + 1}` : '';
+    return `
+      <article class="partner-card" aria-label="${escapeHtml(label || 'Client logo')}">
+        ${isImage ? `<img src="${src}" alt="${escapeHtml(label || 'Client logo')}" loading="lazy">` : `<div style="display:grid;place-items:center;width:100%;height:82px;border-radius:12px;background:linear-gradient(135deg, rgba(43,196,177,0.12), rgba(242,169,59,0.14));"></div>`}
+      </article>
+    `;
+  }).join('');
+
+  track.innerHTML = cards;
+
+  let startX = 0;
+  let startOffset = 0;
+  let currentTranslate = 0;
+
+  const pauseAutoScroll = () => track.classList.add('is-paused');
+  const resumeAutoScroll = () => track.classList.remove('is-paused');
+
+  track.addEventListener('mouseenter', pauseAutoScroll);
+  track.addEventListener('mouseleave', resumeAutoScroll);
+  track.addEventListener('focusin', pauseAutoScroll);
+  track.addEventListener('focusout', resumeAutoScroll);
+
+  track.addEventListener('pointerdown', (event) => {
+    pauseAutoScroll();
+    startX = event.clientX;
+    startOffset = currentTranslate;
+    track.classList.add('dragging');
+    track.setPointerCapture(event.pointerId);
+  });
+
+  track.addEventListener('pointermove', (event) => {
+    if (startX === 0) return;
+    const delta = event.clientX - startX;
+    currentTranslate = startOffset + delta * 0.9;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  });
+
+  track.addEventListener('pointerup', () => {
+    startX = 0;
+    track.classList.remove('dragging');
+    resumeAutoScroll();
+    track.style.transform = '';
+    currentTranslate = 0;
+  });
+
+  track.addEventListener('pointerleave', () => {
+    startX = 0;
+    track.classList.remove('dragging');
+    resumeAutoScroll();
+    track.style.transform = '';
+    currentTranslate = 0;
+  });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const img = document.getElementById('brandLogoImg');
   if (img) img.src = LOGO_URL;
@@ -97,15 +211,28 @@ window.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const mainNav = document.getElementById('mainNav');
   if (navToggle && mainNav) {
-    navToggle.addEventListener('click', () => {
-      const isOpen = mainNav.classList.toggle('is-open');
+    const setNavState = (isOpen) => {
+      mainNav.classList.toggle('is-open', isOpen);
+      navToggle.classList.toggle('is-active', isOpen);
       navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    };
+
+    navToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const willOpen = !mainNav.classList.contains('is-open');
+      setNavState(willOpen);
     });
+
     mainNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        mainNav.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
+        setNavState(false);
       });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setNavState(false);
     });
   }
 
@@ -159,6 +286,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (courseFilterEl && courseGridEl) {
     renderFilterChips(COURSE_DATA.categories);
     renderCourseCards(COURSE_DATA.courses);
+    populateCourseSelect();
 
     const statEl = document.getElementById('statCoursesCount');
     if (statEl) {
@@ -203,6 +331,8 @@ window.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowRight') document.getElementById('courseModalNext').click();
     });
   }
+
+  buildPartners();
 
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
