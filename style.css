@@ -949,6 +949,19 @@ img{ max-width: 100%; display: block; }
   box-shadow: 0 12px 24px rgba(37, 211, 102, 0.3);
 }
 
+.social-link--call{
+  color: #0EA5E9;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+}
+
+.social-link--call:hover{
+  color: var(--white);
+  background: #0EA5E9;
+  border-color: transparent;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.3);
+}
+
 .social-link:focus-visible{
   outline: 2px solid var(--trace-teal);
   outline-offset: 6px;
