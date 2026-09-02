@@ -634,7 +634,7 @@ img{ max-width: 100%; display: block; }
   will-change: transform;
   cursor: grab;
   user-select: none;
-  animation: partner-scroll 40s linear infinite;
+  animation: partner-scroll 70s linear infinite;
 }
 .partners__track.dragging{ cursor: grabbing; }
 .partners__track.is-paused{ animation-play-state: paused; }
