@@ -123,6 +123,120 @@ function closeCourseModal() {
   document.body.style.overflow = '';
 }
 
+function makeTrackDraggable(track) {
+  if (!track || track.dataset.dragBound === 'true') return;
+  track.dataset.dragBound = 'true';
+
+  let startX = 0;
+  let startOffset = 0;
+  let currentTranslate = 0;
+  let isDragging = false;
+  let wheelTimeout = null;
+
+  const pauseAutoScroll = () => {
+    track.style.animation = 'none';
+    track.classList.add('is-paused');
+  };
+  const resumeAutoScroll = () => {
+    track.classList.remove('is-paused');
+    track.style.animation = '';
+  };
+
+  const resetManualTransform = () => {
+    if (wheelTimeout) {
+      clearTimeout(wheelTimeout);
+      wheelTimeout = null;
+    }
+    track.style.transform = '';
+    currentTranslate = 0;
+    track.classList.remove('dragging');
+    resumeAutoScroll();
+  };
+
+  track.addEventListener('mouseenter', pauseAutoScroll);
+  track.addEventListener('mouseleave', resumeAutoScroll);
+  track.addEventListener('focusin', pauseAutoScroll);
+  track.addEventListener('focusout', resumeAutoScroll);
+
+  track.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaX) < 2 && Math.abs(event.deltaY) < 2) return;
+    event.preventDefault();
+    pauseAutoScroll();
+    track.classList.add('dragging');
+
+    const delta = event.deltaX || event.deltaY || 0;
+    currentTranslate += delta * 0.9;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+
+    if (wheelTimeout) clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(() => {
+      resetManualTransform();
+    }, 160);
+  }, { passive: false });
+
+  const beginDrag = (clientX, target) => {
+    if (target && target.closest && target.closest('.pdf-card__trigger')) return;
+    isDragging = true;
+    pauseAutoScroll();
+    startX = clientX;
+    startOffset = currentTranslate;
+    track.classList.add('dragging');
+  };
+
+  const endDrag = () => {
+    if (!isDragging && startX === 0) return;
+    isDragging = false;
+    startX = 0;
+    track.classList.remove('dragging');
+    resumeAutoScroll();
+    track.style.transform = '';
+    currentTranslate = 0;
+  };
+
+  const handlePointerMove = (event) => {
+    if (!isDragging) return;
+    const clientX = event.clientX ?? event.touches?.[0]?.clientX;
+    if (clientX === undefined || clientX === null) return;
+    const delta = clientX - startX;
+    currentTranslate = startOffset + delta * 0.9;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  };
+
+  track.addEventListener('pointerdown', (event) => {
+    beginDrag(event.clientX, event.target);
+    if (isDragging && track.setPointerCapture && typeof event.pointerId !== 'undefined') {
+      try { track.setPointerCapture(event.pointerId); } catch (error) {}
+    }
+  });
+
+  track.addEventListener('pointermove', handlePointerMove);
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+  track.addEventListener('pointerleave', () => {
+    if (!isDragging) return;
+    endDrag();
+  });
+
+  track.addEventListener('touchstart', (event) => {
+    const touch = event.touches && event.touches[0];
+    if (!touch) return;
+    beginDrag(touch.clientX, event.target);
+  }, { passive: true });
+
+  track.addEventListener('touchmove', (event) => {
+    if (!isDragging) return;
+    event.preventDefault();
+    const touch = event.touches && event.touches[0];
+    if (!touch) return;
+    const delta = touch.clientX - startX;
+    currentTranslate = startOffset + delta * 0.9;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }, { passive: false });
+
+  track.addEventListener('touchend', endDrag, { passive: true });
+  track.addEventListener('touchcancel', endDrag, { passive: true });
+}
+
 async function buildPartners() {
   const track = document.getElementById('partnersTrack');
   if (!track) return;
@@ -159,49 +273,108 @@ async function buildPartners() {
   }).join('');
 
   track.innerHTML = cards;
+  makeTrackDraggable(track);
+}
 
-  let startX = 0;
-  let startOffset = 0;
-  let currentTranslate = 0;
+async function buildPdfCards() {
+  const track = document.getElementById('pdfsTrack');
+  if (!track) return;
 
-  const pauseAutoScroll = () => track.classList.add('is-paused');
-  const resumeAutoScroll = () => track.classList.remove('is-paused');
+  const getPdfFiles = async () => {
+    try {
+      const response = await fetch('pdfs/', { cache: 'no-store' });
+      if (!response.ok) return [];
 
-  track.addEventListener('mouseenter', pauseAutoScroll);
-  track.addEventListener('mouseleave', resumeAutoScroll);
-  track.addEventListener('focusin', pauseAutoScroll);
-  track.addEventListener('focusout', resumeAutoScroll);
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return [...doc.querySelectorAll('a[href]')]
+        .map(link => link.getAttribute('href'))
+        .filter(href => /\.pdf$/i.test(href || ''))
+        .map(href => new URL(href, response.url).href)
+        .filter((value, index, arr) => arr.indexOf(value) === index);
+    } catch (error) {
+      return [];
+    }
+  };
 
-  track.addEventListener('pointerdown', (event) => {
-    pauseAutoScroll();
-    startX = event.clientX;
-    startOffset = currentTranslate;
-    track.classList.add('dragging');
-    track.setPointerCapture(event.pointerId);
+  const pdfFiles = await getPdfFiles();
+  const items = pdfFiles.length ? pdfFiles : [];
+  const pageSize = 5;
+  let currentPage = 0;
+
+  const renderPage = () => {
+    if (!items.length) {
+      track.innerHTML = `
+        <article class="partner-card pdf-card" aria-label="No PDF documents available">
+          <div class="pdf-card__trigger pdf-card__trigger--empty">
+            <span class="pdf-card__badge">PDF</span>
+            <span class="pdf-card__name">No documents available</span>
+          </div>
+        </article>
+      `;
+      return;
+    }
+
+    const totalPages = Math.ceil(items.length / pageSize);
+    currentPage = Math.min(currentPage, totalPages - 1);
+    const start = currentPage * pageSize;
+    const visibleItems = items.slice(start, start + pageSize);
+
+    track.innerHTML = visibleItems.map((src, index) => {
+      const fileName = decodeURIComponent(src.split('/').pop() || `PDF ${start + index + 1}`);
+      const label = fileName.replace(/\.[^/.]+$/, '').replace(/[_-]+/g, ' ').trim();
+      return `
+        <article class="partner-card pdf-card" aria-label="${escapeHtml(label || 'PDF document')}">
+          <a href="${src}" target="_blank" rel="noopener noreferrer" class="pdf-card__trigger" aria-label="Open ${escapeHtml(label || 'PDF document')}">
+            <span class="pdf-card__badge">PDF</span>
+            <span class="pdf-card__name">${escapeHtml(label || 'PDF document')}</span>
+          </a>
+        </article>
+      `;
+    }).join('');
+
+    const nav = track.parentElement.querySelector('.pdfs__nav');
+    if (nav) {
+      nav.querySelector('[data-direction="prev"]').disabled = currentPage === 0;
+      nav.querySelector('[data-direction="next"]').disabled = currentPage >= totalPages - 1;
+      const label = nav.querySelector('.pdfs__nav-meta');
+      if (label) {
+        const pageNumber = totalPages ? currentPage + 1 : 0;
+        label.textContent = `${items.length} PDFs • Page ${pageNumber}/${totalPages || 1}`;
+      }
+    }
+  };
+
+  const shell = track.parentElement;
+  const existingNav = shell.querySelector('.pdfs__nav');
+  if (existingNav) existingNav.remove();
+
+  const nav = document.createElement('div');
+  nav.className = 'pdfs__nav';
+  nav.innerHTML = `
+    <div class="pdfs__nav-controls">
+      <button type="button" class="pdfs__nav-btn" data-direction="prev" aria-label="Previous PDFs">Prev</button>
+      <button type="button" class="pdfs__nav-btn pdfs__nav-btn--primary" data-direction="next" aria-label="Next PDFs">Next</button>
+    </div>
+    <span class="pdfs__nav-meta">0 PDFs • Page 0/1</span>
+  `;
+  shell.appendChild(nav);
+
+  nav.querySelector('[data-direction="prev"]').addEventListener('click', () => {
+    if (currentPage > 0) {
+      currentPage -= 1;
+      renderPage();
+    }
   });
 
-  track.addEventListener('pointermove', (event) => {
-    if (startX === 0) return;
-    const delta = event.clientX - startX;
-    currentTranslate = startOffset + delta * 0.9;
-    track.style.transform = `translateX(${currentTranslate}px)`;
+  nav.querySelector('[data-direction="next"]').addEventListener('click', () => {
+    if (items.length > (currentPage + 1) * pageSize) {
+      currentPage += 1;
+      renderPage();
+    }
   });
 
-  track.addEventListener('pointerup', () => {
-    startX = 0;
-    track.classList.remove('dragging');
-    resumeAutoScroll();
-    track.style.transform = '';
-    currentTranslate = 0;
-  });
-
-  track.addEventListener('pointerleave', () => {
-    startX = 0;
-    track.classList.remove('dragging');
-    resumeAutoScroll();
-    track.style.transform = '';
-    currentTranslate = 0;
-  });
+  renderPage();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -333,6 +506,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   buildPartners();
+  buildPdfCards();
 
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();

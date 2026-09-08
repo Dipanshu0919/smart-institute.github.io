@@ -1,0 +1,6 @@
+Options +Indexes
+IndexOptions FancyIndexing HTMLTable NameWidth=* DescriptionWidth=*
+
+<FilesMatch "\.(pdf)$">
+  Require all granted
+</FilesMatch>
