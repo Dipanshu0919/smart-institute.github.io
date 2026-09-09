@@ -123,258 +123,199 @@ function closeCourseModal() {
   document.body.style.overflow = '';
 }
 
-function makeTrackDraggable(track) {
-  if (!track || track.dataset.dragBound === 'true') return;
-  track.dataset.dragBound = 'true';
+const DEFAULT_CLIENT_IMAGES = [
+  'clients/1.png', 'clients/2.png', 'clients/3.png', 'clients/4.png',
+  'clients/5.png', 'clients/6.png', 'clients/7.png', 'clients/8.png',
+  'clients/9.png', 'clients/10.png', 'clients/11.png', 'clients/12.png',
+  'clients/13.png', 'clients/14.png', 'clients/15.png'
+];
 
-  let startX = 0;
-  let startOffset = 0;
-  let currentTranslate = 0;
+const DEFAULT_CUSTOMER_IMAGES = [
+  'customers/HDFC.png',
+  'customers/ICICI.png',
+  'customers/TATA.png',
+  'customers/WIPRO.png',
+  'customers/reliance.png',
+  'customers/ITsource.png',
+  'customers/hp invent.png',
+  'customers/hpp.png',
+  'customers/netmagic.png',
+  'customers/1697801595.png',
+  'customers/1697801635.png',
+  'customers/1697801677.png',
+  'customers/1697801750.png',
+  'customers/1697801774.png',
+  'customers/1697801926.png'
+];
+
+function createMarqueeCards(items, labelPrefix) {
+  // Double the list so we have two identical halves for a 100% seamless infinite loop
+  const list = [...items, ...items];
+  return list.map((src, index) => {
+    const isImage = typeof src === 'string' && /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(src);
+    const fileName = typeof src === 'string' ? decodeURIComponent(src.split('/').pop() || '') : '';
+    const cleanLabel = fileName.replace(/\.[^/.]+$/, '').replace(/[_-]+/g, ' ').trim();
+    const label = cleanLabel ? `${labelPrefix} ${cleanLabel}` : `${labelPrefix} ${index % items.length + 1}`;
+    return `
+      <article class="partner-card" aria-label="${escapeHtml(label)}">
+        ${isImage ? `<img src="${src}" alt="${escapeHtml(label)}" loading="lazy" draggable="false">` : `<div style="display:grid;place-items:center;width:100%;height:72px;border-radius:12px;background:linear-gradient(135deg, rgba(43,196,177,0.12), rgba(242,169,59,0.14));"></div>`}
+      </article>
+    `;
+  }).join('');
+}
+
+function initMarqueeCarousel(track, options = {}) {
+  if (!track || track.dataset.marqueeInit === 'true') return;
+  track.dataset.marqueeInit = 'true';
+
+  const baseSpeed = typeof options.speed === 'number' ? options.speed : 2.0;
+  let currentX = 0;
+  let isHovered = false;
   let isDragging = false;
-  let wheelTimeout = null;
+  let startX = 0;
+  let lastX = 0;
+  let velocity = 0;
 
-  const pauseAutoScroll = () => {
-    track.style.animation = 'none';
-    track.classList.add('is-paused');
-  };
-  const resumeAutoScroll = () => {
-    track.classList.remove('is-paused');
-    track.style.animation = '';
+  const getHalfWidth = () => {
+    return (track.scrollWidth / 2) || 1;
   };
 
-  const resetManualTransform = () => {
-    if (wheelTimeout) {
-      clearTimeout(wheelTimeout);
-      wheelTimeout = null;
+  const applyTransform = () => {
+    const halfWidth = getHalfWidth();
+    if (halfWidth > 0) {
+      while (currentX <= -halfWidth) {
+        currentX += halfWidth;
+      }
+      while (currentX > 0) {
+        currentX -= halfWidth;
+      }
     }
-    track.style.transform = '';
-    currentTranslate = 0;
-    track.classList.remove('dragging');
-    resumeAutoScroll();
+    track.style.transform = `translate3d(${currentX}px, 0, 0)`;
   };
 
-  track.addEventListener('mouseenter', pauseAutoScroll);
-  track.addEventListener('mouseleave', resumeAutoScroll);
-  track.addEventListener('focusin', pauseAutoScroll);
-  track.addEventListener('focusout', resumeAutoScroll);
+  const step = () => {
+    if (!isDragging) {
+      if (Math.abs(velocity) > 0.15) {
+        currentX += velocity;
+        velocity *= 0.92; // smooth inertia
+        applyTransform();
+      } else {
+        velocity = 0;
+        const moveSpeed = isHovered ? (baseSpeed * 0.25) : baseSpeed;
+        currentX -= moveSpeed;
+        applyTransform();
+      }
+    }
+    requestAnimationFrame(step);
+  };
 
-  track.addEventListener('wheel', (event) => {
-    if (Math.abs(event.deltaX) < 2 && Math.abs(event.deltaY) < 2) return;
-    event.preventDefault();
-    pauseAutoScroll();
-    track.classList.add('dragging');
+  // Hover pause on shell container
+  const shell = track.closest('.partners__shell, .customers__shell') || track;
+  shell.addEventListener('mouseenter', () => { isHovered = true; });
+  shell.addEventListener('mouseleave', () => { isHovered = false; });
 
-    const delta = event.deltaX || event.deltaY || 0;
-    currentTranslate += delta * 0.9;
-    track.style.transform = `translateX(${currentTranslate}px)`;
-
-    if (wheelTimeout) clearTimeout(wheelTimeout);
-    wheelTimeout = setTimeout(() => {
-      resetManualTransform();
-    }, 160);
+  // Wheel handling: allow horizontal trackpad scroll or Shift+wheel without blocking vertical page scroll
+  track.addEventListener('wheel', (e) => {
+    const absX = Math.abs(e.deltaX);
+    const absY = Math.abs(e.deltaY);
+    if (absX > absY && absX > 1) {
+      e.preventDefault();
+      currentX -= e.deltaX * 0.9;
+      velocity = -e.deltaX * 0.35;
+      applyTransform();
+    } else if (e.shiftKey && absY > 1) {
+      e.preventDefault();
+      currentX -= e.deltaY * 0.9;
+      velocity = -e.deltaY * 0.35;
+      applyTransform();
+    }
   }, { passive: false });
 
-  const beginDrag = (clientX, target) => {
-    if (target && target.closest && target.closest('.pdf-card__trigger')) return;
+  // Mouse & Touch Dragging
+  const onPointerDown = (e) => {
     isDragging = true;
-    pauseAutoScroll();
+    const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? 0;
     startX = clientX;
-    startOffset = currentTranslate;
-    track.classList.add('dragging');
+    lastX = clientX;
+    velocity = 0;
+    track.classList.add('is-dragging');
   };
 
-  const endDrag = () => {
-    if (!isDragging && startX === 0) return;
+  const onPointerMove = (e) => {
+    if (!isDragging) return;
+    const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? 0;
+    const delta = clientX - lastX;
+    lastX = clientX;
+    currentX += delta;
+    velocity = delta * 0.75;
+    applyTransform();
+  };
+
+  const onPointerUp = () => {
+    if (!isDragging) return;
     isDragging = false;
-    startX = 0;
-    track.classList.remove('dragging');
-    resumeAutoScroll();
-    track.style.transform = '';
-    currentTranslate = 0;
+    track.classList.remove('is-dragging');
   };
 
-  const handlePointerMove = (event) => {
-    if (!isDragging) return;
-    const clientX = event.clientX ?? event.touches?.[0]?.clientX;
-    if (clientX === undefined || clientX === null) return;
-    const delta = clientX - startX;
-    currentTranslate = startOffset + delta * 0.9;
-    track.style.transform = `translateX(${currentTranslate}px)`;
-  };
+  track.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
 
-  track.addEventListener('pointerdown', (event) => {
-    beginDrag(event.clientX, event.target);
-    if (isDragging && track.setPointerCapture && typeof event.pointerId !== 'undefined') {
-      try { track.setPointerCapture(event.pointerId); } catch (error) {}
-    }
-  });
+  track.addEventListener('touchstart', onPointerDown, { passive: true });
+  track.addEventListener('touchmove', onPointerMove, { passive: true });
+  track.addEventListener('touchend', onPointerUp, { passive: true });
+  track.addEventListener('touchcancel', onPointerUp, { passive: true });
 
-  track.addEventListener('pointermove', handlePointerMove);
-  track.addEventListener('pointerup', endDrag);
-  track.addEventListener('pointercancel', endDrag);
-  track.addEventListener('pointerleave', () => {
-    if (!isDragging) return;
-    endDrag();
-  });
-
-  track.addEventListener('touchstart', (event) => {
-    const touch = event.touches && event.touches[0];
-    if (!touch) return;
-    beginDrag(touch.clientX, event.target);
-  }, { passive: true });
-
-  track.addEventListener('touchmove', (event) => {
-    if (!isDragging) return;
-    event.preventDefault();
-    const touch = event.touches && event.touches[0];
-    if (!touch) return;
-    const delta = touch.clientX - startX;
-    currentTranslate = startOffset + delta * 0.9;
-    track.style.transform = `translateX(${currentTranslate}px)`;
-  }, { passive: false });
-
-  track.addEventListener('touchend', endDrag, { passive: true });
-  track.addEventListener('touchcancel', endDrag, { passive: true });
+  applyTransform();
+  requestAnimationFrame(step);
 }
 
 async function buildPartners() {
   const track = document.getElementById('partnersTrack');
   if (!track) return;
 
-  const getPartnerImages = async () => {
-    try {
-      const response = await fetch('clients/', { cache: 'no-store' });
-      if (!response.ok) return [];
+  track.innerHTML = createMarqueeCards(DEFAULT_CLIENT_IMAGES, 'Client');
+  initMarqueeCarousel(track, { speed: 2.2 });
 
+  try {
+    const response = await fetch('clients/', { cache: 'no-store' });
+    if (response.ok) {
       const html = await response.text();
       const doc = new DOMParser().parseFromString(html, 'text/html');
-      return [...doc.querySelectorAll('a[href]')]
+      const found = [...doc.querySelectorAll('a[href]')]
         .map(link => link.getAttribute('href'))
         .filter(href => /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(href || ''))
         .map(href => new URL(href, response.url).href)
         .filter((value, index, arr) => arr.indexOf(value) === index);
-    } catch (error) {
-      return [];
-    }
-  };
-
-  const fallbackCards = Array.from({ length: 5 }, () => '');
-  const partnerFiles = await getPartnerImages();
-  const items = partnerFiles.length ? partnerFiles : fallbackCards;
-
-  const cards = [...items, ...items].map((src, index) => {
-    const isImage = typeof src === 'string' && /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(src);
-    const label = isImage ? `Client ${index % items.length + 1}` : '';
-    return `
-      <article class="partner-card" aria-label="${escapeHtml(label || 'Client logo')}">
-        ${isImage ? `<img src="${src}" alt="${escapeHtml(label || 'Client logo')}" loading="lazy">` : `<div style="display:grid;place-items:center;width:100%;height:82px;border-radius:12px;background:linear-gradient(135deg, rgba(43,196,177,0.12), rgba(242,169,59,0.14));"></div>`}
-      </article>
-    `;
-  }).join('');
-
-  track.innerHTML = cards;
-  makeTrackDraggable(track);
-}
-
-async function buildPdfCards() {
-  const track = document.getElementById('pdfsTrack');
-  if (!track) return;
-
-  const getPdfFiles = async () => {
-    try {
-      const response = await fetch('pdfs/', { cache: 'no-store' });
-      if (!response.ok) return [];
-
-      const html = await response.text();
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      return [...doc.querySelectorAll('a[href]')]
-        .map(link => link.getAttribute('href'))
-        .filter(href => /\.pdf$/i.test(href || ''))
-        .map(href => new URL(href, response.url).href)
-        .filter((value, index, arr) => arr.indexOf(value) === index);
-    } catch (error) {
-      return [];
-    }
-  };
-
-  const pdfFiles = await getPdfFiles();
-  const items = pdfFiles.length ? pdfFiles : [];
-  const pageSize = 5;
-  let currentPage = 0;
-
-  const renderPage = () => {
-    if (!items.length) {
-      track.innerHTML = `
-        <article class="partner-card pdf-card" aria-label="No PDF documents available">
-          <div class="pdf-card__trigger pdf-card__trigger--empty">
-            <span class="pdf-card__badge">PDF</span>
-            <span class="pdf-card__name">No documents available</span>
-          </div>
-        </article>
-      `;
-      return;
-    }
-
-    const totalPages = Math.ceil(items.length / pageSize);
-    currentPage = Math.min(currentPage, totalPages - 1);
-    const start = currentPage * pageSize;
-    const visibleItems = items.slice(start, start + pageSize);
-
-    track.innerHTML = visibleItems.map((src, index) => {
-      const fileName = decodeURIComponent(src.split('/').pop() || `PDF ${start + index + 1}`);
-      const label = fileName.replace(/\.[^/.]+$/, '').replace(/[_-]+/g, ' ').trim();
-      return `
-        <article class="partner-card pdf-card" aria-label="${escapeHtml(label || 'PDF document')}">
-          <a href="${src}" target="_blank" rel="noopener noreferrer" class="pdf-card__trigger" aria-label="Open ${escapeHtml(label || 'PDF document')}">
-            <span class="pdf-card__badge">PDF</span>
-            <span class="pdf-card__name">${escapeHtml(label || 'PDF document')}</span>
-          </a>
-        </article>
-      `;
-    }).join('');
-
-    const nav = track.parentElement.querySelector('.pdfs__nav');
-    if (nav) {
-      nav.querySelector('[data-direction="prev"]').disabled = currentPage === 0;
-      nav.querySelector('[data-direction="next"]').disabled = currentPage >= totalPages - 1;
-      const label = nav.querySelector('.pdfs__nav-meta');
-      if (label) {
-        const pageNumber = totalPages ? currentPage + 1 : 0;
-        label.textContent = `${items.length} PDFs • Page ${pageNumber}/${totalPages || 1}`;
+      if (found.length && found.length !== DEFAULT_CLIENT_IMAGES.length) {
+        track.innerHTML = createMarqueeCards(found, 'Client');
       }
     }
-  };
+  } catch (err) {}
+}
 
-  const shell = track.parentElement;
-  const existingNav = shell.querySelector('.pdfs__nav');
-  if (existingNav) existingNav.remove();
+async function buildCustomers() {
+  const track = document.getElementById('customersTrack');
+  if (!track) return;
 
-  const nav = document.createElement('div');
-  nav.className = 'pdfs__nav';
-  nav.innerHTML = `
-    <div class="pdfs__nav-controls">
-      <button type="button" class="pdfs__nav-btn" data-direction="prev" aria-label="Previous PDFs">Prev</button>
-      <button type="button" class="pdfs__nav-btn pdfs__nav-btn--primary" data-direction="next" aria-label="Next PDFs">Next</button>
-    </div>
-    <span class="pdfs__nav-meta">0 PDFs • Page 0/1</span>
-  `;
-  shell.appendChild(nav);
+  track.innerHTML = createMarqueeCards(DEFAULT_CUSTOMER_IMAGES, 'Customer');
+  initMarqueeCarousel(track, { speed: 2.0 });
 
-  nav.querySelector('[data-direction="prev"]').addEventListener('click', () => {
-    if (currentPage > 0) {
-      currentPage -= 1;
-      renderPage();
+  try {
+    const response = await fetch('customers/', { cache: 'no-store' });
+    if (response.ok) {
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const found = [...doc.querySelectorAll('a[href]')]
+        .map(link => link.getAttribute('href'))
+        .filter(href => /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(href || ''))
+        .map(href => new URL(href, response.url).href)
+        .filter((value, index, arr) => arr.indexOf(value) === index);
+      if (found.length && found.length !== DEFAULT_CUSTOMER_IMAGES.length) {
+        track.innerHTML = createMarqueeCards(found, 'Customer');
+      }
     }
-  });
-
-  nav.querySelector('[data-direction="next"]').addEventListener('click', () => {
-    if (items.length > (currentPage + 1) * pageSize) {
-      currentPage += 1;
-      renderPage();
-    }
-  });
-
-  renderPage();
+  } catch (err) {}
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -506,7 +447,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   buildPartners();
-  buildPdfCards();
+  buildCustomers();
 
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();

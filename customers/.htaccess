@@ -1,0 +1,6 @@
+Options +Indexes
+IndexOptions FancyIndexing HTMLTable NameWidth=* DescriptionWidth=*
+
+<FilesMatch "\.(png|jpe?g|webp|gif|svg|bmp)$">
+  Require all granted
+</FilesMatch>
